@@ -1,8 +1,2 @@
-# Skill Stack
-- Spring Boot
-- Spring Data JPA
-- WEBFLUX
-- FeignClient
-- MySQL
-- Docker
-- Swagger
+# Kpaas
+클라우드 공모전
