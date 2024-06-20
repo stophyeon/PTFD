@@ -24,7 +24,7 @@ class MemberServiceTest {
     @Test
     void profile(){
         Member member=memberRepository.findByNickName("jaehak").get();
-        System.out.println(member.getName());
+        System.out.println(member.getUserName());
     }
     @Test
     void search(){

@@ -27,13 +27,13 @@ class FollowRepositoryImplTest {
     FollowRepository followRepository;
     @Autowired
     MemberRepository memberRepository;
-    MemberDto memberDto= MemberDto.builder().name("정지현").nickName("jjh").build();
+    MemberDto memberDto= MemberDto.builder().userName("정지현").nickName("jjh").build();
     Member member=Member.builder().memberDto(memberDto).build();
 
-    MemberDto memberDto1= MemberDto.builder().name("김민우").nickName("kmw").build();
+    MemberDto memberDto1= MemberDto.builder().userName("김민우").nickName("kmw").build();
     Member member1=Member.builder().memberDto(memberDto1).build();
 
-    MemberDto memberDto2= MemberDto.builder().name("정재학").nickName("hak").build();
+    MemberDto memberDto2= MemberDto.builder().userName("정재학").nickName("hak").build();
     Member member2=Member.builder().memberDto(memberDto2).build();
 
     Follow follow = Follow.builder()
@@ -50,9 +50,9 @@ class FollowRepositoryImplTest {
             .build();
     @BeforeEach
     void setup(){
-        member.setMember_id(1L);
-        member1.setMember_id(2L);
-        member2.setMember_id(3L);
+        member.setMemberId(1L);
+        member1.setMemberId(2L);
+        member2.setMemberId(3L);
         memberRepository.save(member);
         memberRepository.save(member1);
         memberRepository.save(member2);
@@ -71,17 +71,17 @@ class FollowRepositoryImplTest {
 
         List<Member> list=followRepository.findFollower("kmw");
         System.out.println(list.size());
-        list.forEach(m->System.out.println(m.getName()));
+        list.forEach(m->System.out.println(m.getUserName()));
     }
 
     @Test
     void findFollowing() {
         List<Member> members = memberRepository.findAll();
         List<Follow> follows = followRepository.findAll();
-        members.forEach(m->System.out.println(m.getMember_id()));
+        members.forEach(m->System.out.println(m.getMemberId()));
 
         List<Member> list=followRepository.findFollowing("hak");
         System.out.println(list.size());
-        list.forEach(m->System.out.println(m.getName()));
+        list.forEach(m->System.out.println(m.getUserName()));
     }
 }

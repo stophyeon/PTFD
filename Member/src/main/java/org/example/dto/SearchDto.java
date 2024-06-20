@@ -7,5 +7,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SearchDto {
     private String word;
-    private String product_name;
+    private String post_name;
 }

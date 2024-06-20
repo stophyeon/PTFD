@@ -12,9 +12,8 @@ import org.example.repository.follow.FollowRepository;
 import org.example.repository.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @Slf4j
@@ -23,7 +22,7 @@ public class FollowService {
     private final FollowRepository followRepository;
     private final MemberRepository memberRepository;
     @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em;
     //Follow 신청 자신이 follower, 상대가 following
     @Transactional
     @TimeCheck
@@ -31,10 +30,10 @@ public class FollowService {
 
         Member following_member = memberRepository.findByEmail(email).get();
         Member follower_member = memberRepository.findByEmail(MyEmail).get();
-        if (!followRepository.existsByFollowingIdAndFollowerId(follower_member.getMember_id(),follower_member.getMember_id())){
+        if (!followRepository.existsByFollowingIdAndFollowerId(follower_member.getMemberId(),follower_member.getMemberId())){
             Follow follow = Follow.builder()
-                    .followingId(following_member.getMember_id())
-                    .followerId(follower_member.getMember_id())
+                    .followingId(following_member.getMemberId())
+                    .followerId(follower_member.getMemberId())
                     .build();
             //follow 관계 저장
             em.persist(follow);

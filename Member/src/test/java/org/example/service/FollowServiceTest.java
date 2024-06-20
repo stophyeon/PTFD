@@ -32,8 +32,8 @@ class FollowServiceTest {
         Member following_member = memberRepository.findByEmail(email).get();
         Member follower_member = memberRepository.findByEmail(MyEmail).get();
         Follow follow = Follow.builder()
-                .followingId(following_member.getMember_id())
-                .followerId(follower_member.getMember_id())
+                .followingId(following_member.getMemberId())
+                .followerId(follower_member.getMemberId())
                 .build();
 
         followRepository.save(follow);
@@ -45,7 +45,7 @@ class FollowServiceTest {
     void follower(){
         Optional<Member> member = memberRepository.findByEmail("j6778@naver.com");
         List<Member> folloingList=followRepository.findFollowing(member.get().getNickName());
-        folloingList.forEach(s->System.out.println(s.getName()));
+        folloingList.forEach(s->System.out.println(s.getUserName()));
     }
 
 

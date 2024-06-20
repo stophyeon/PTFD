@@ -78,7 +78,7 @@ public class KakaoService {
                 .email(kakaoAccount.get("email").toString())
                 .image(properties.get("profile_image").toString())
                 .nickName(properties.get("nickname").toString())
-                .name(properties.get("nickname").toString())
+                .userName(properties.get("nickname").toString())
                 .password(passwordEncoder.encode("default1234"))
                 .social_type(1)
                 .build();

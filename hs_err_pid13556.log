@@ -638,31 +638,31 @@ symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Pr
 VM Arguments:
 jvm_args: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.2\lib\idea_rt.jar=53610:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.2\bin -Dfile.encoding=UTF-8 
 java_command: org.example.MemberApplication
-java_class_path (initial): C:\Users\jj677\Darakbang\Member\out\production\classes;C:\Users\jj677\Darakbang\Member\out\production\resources;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-web\3.2.3\bf2b775d4f4e6349129c64de30939a5493779706\spring-boot-starter-web-3.2.3.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-data-jpa\3.2.3\1fd0770b23c57627e5a37726fb4060f5bfa4da6f\spring-boot-starter-data-jpa-3.2.3.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-oauth2-client\3.2.3\870f5a2f66abb297d1685c32c778cc2d61540964\spring-boot-starter-oauth2-client-3.2.3.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-security\3.2.3\f6353a8e62be7372b3968ab71e613b5188d55c3b\spring-boot-starter-security-3.2.3.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-validation\3.2.3\6bb79fe1a0760b5cec37bd85e31bd4cc987c8185\spring-boot-starter-validation-3.2.3.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\com.mysql\mysql-connector-j\8.2.0\56d34aea30915904b1c883f1cfae731dd2df6029\mysql-connector-j-8.2.0.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\com.googlecode.json-simple\json-simple\1.1.1\c9ad4a0850ab676c5c64461a05ca524cdfff59f1\json-simple-1.1.1.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\org.springframework.cloud\spring-cloud-starter-openfeign\4.1.0\1ec867ae2e6f9f0bf06b8b65bc79df0b7573f7a3\spring-cloud-starter-openfeign-4.1.0.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\io.jsonwebtoken\jjwt-impl\0.11.5\40a599f0e8a8e4e0701596fbb15e67bfda64fdf0\jjwt-impl-0.11.5.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\io.jsonwebtoken\jjwt-jackson\0.11.5\3b83a06809e98a69402d7333dcf67df6f6ea4579\jjwt-jackson-0.11.5.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\io.jsonwebtoken\jjwt-api\0.11.5\f742940045619d06383e7
+java_class_path (initial): C:\Users\jj677\Darakbang\Member\out\Postion\classes;C:\Users\jj677\Darakbang\Member\out\Postion\resources;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-web\3.2.3\bf2b775d4f4e6349129c64de30939a5493779706\spring-boot-starter-web-3.2.3.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-data-jpa\3.2.3\1fd0770b23c57627e5a37726fb4060f5bfa4da6f\spring-boot-starter-data-jpa-3.2.3.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-oauth2-client\3.2.3\870f5a2f66abb297d1685c32c778cc2d61540964\spring-boot-starter-oauth2-client-3.2.3.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-security\3.2.3\f6353a8e62be7372b3968ab71e613b5188d55c3b\spring-boot-starter-security-3.2.3.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\org.springframework.boot\spring-boot-starter-validation\3.2.3\6bb79fe1a0760b5cec37bd85e31bd4cc987c8185\spring-boot-starter-validation-3.2.3.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\com.mysql\mysql-connector-j\8.2.0\56d34aea30915904b1c883f1cfae731dd2df6029\mysql-connector-j-8.2.0.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\com.googlecode.json-simple\json-simple\1.1.1\c9ad4a0850ab676c5c64461a05ca524cdfff59f1\json-simple-1.1.1.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\org.springframework.cloud\spring-cloud-starter-openfeign\4.1.0\1ec867ae2e6f9f0bf06b8b65bc79df0b7573f7a3\spring-cloud-starter-openfeign-4.1.0.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\io.jsonwebtoken\jjwt-impl\0.11.5\40a599f0e8a8e4e0701596fbb15e67bfda64fdf0\jjwt-impl-0.11.5.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\io.jsonwebtoken\jjwt-jackson\0.11.5\3b83a06809e98a69402d7333dcf67df6f6ea4579\jjwt-jackson-0.11.5.jar;C:\Users\jj677\.gradle\caches\modules-2\files-2.1\io.jsonwebtoken\jjwt-api\0.11.5\f742940045619d06383e7
 Launcher Type: SUN_STANDARD
 
 [Global flags]
-     intx CICompilerCount                          = 3                                         {product} {ergonomic}
-     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
-     uint G1ConcRefinementThreads                  = 4                                         {product} {ergonomic}
-   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
-    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
-   size_t InitialHeapSize                          = 134217728                                 {product} {ergonomic}
-   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
-   size_t MaxHeapSize                              = 2124414976                                {product} {ergonomic}
-   size_t MaxNewSize                               = 1274019840                                {product} {ergonomic}
-   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
-   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
-    uintx NonNMethodCodeHeapSize                   = 5832780                                {pd product} {ergonomic}
-    uintx NonProfiledCodeHeapSize                  = 122912730                              {pd product} {ergonomic}
-    uintx ProfiledCodeHeapSize                     = 122912730                              {pd product} {ergonomic}
-    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
-     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+     intx CICompilerCount                          = 3                                         {Post} {ergonomic}
+     uint ConcGCThreads                            = 1                                         {Post} {ergonomic}
+     uint G1ConcRefinementThreads                  = 4                                         {Post} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {Post} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {Post} {ergonomic}
+   size_t InitialHeapSize                          = 134217728                                 {Post} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {Post} {ergonomic}
+   size_t MaxHeapSize                              = 2124414976                                {Post} {ergonomic}
+   size_t MaxNewSize                               = 1274019840                                {Post} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {Post} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {Post} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5832780                                {pd Post} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122912730                              {pd Post} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122912730                              {pd Post} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd Post} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {Post} {ergonomic}
    size_t SoftMaxHeapSize                          = 2124414976                             {manageable} {ergonomic}
-     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
-     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
-     bool UseG1GC                                  = true                                      {product} {ergonomic}
-     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {Post lp64_Post} {ergonomic}
+     bool UseCompressedOops                        = true                           {Post lp64_Post} {ergonomic}
+     bool UseG1GC                                  = true                                      {Post} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd Post} {ergonomic}
 
 Logging:
 Log output configuration:

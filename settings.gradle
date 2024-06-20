@@ -1,6 +1,6 @@
-rootProject.name = 'Darakbang'
+rootProject.name = 'KPaaS'
 include 'Member'
-include 'Product'
+include 'Post'
 include 'Eureka'
 include 'Api-gateway'
 include 'Config-server'
