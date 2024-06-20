@@ -15,7 +15,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_pid")
-    private int purchaseId;
+    private int paymentPid;
 
     @Column(name = "payment_id")
     private String paymentId ; //결제 id
@@ -23,19 +23,19 @@ public class Payment {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "purchase_at")
-    private Timestamp purchaseAt ;
+    @Column(name = "payment_at")
+    private Timestamp paymentAt;
     //결제 시간
 
     @Column(name = "total_amount")
     private int totalAmount ;
 
     @Column(name = "point_name")
-    private String orderName ;
+    private String pointName;
     //구매한 point명
 
     @Column(name = "user_email")
-    private String userEmail;
+    private String memberEmail;
 
 
 
@@ -43,10 +43,10 @@ public class Payment {
     public Payment(String paymentid, String status, Timestamp purchaseat, String ordername, int totalamount, String useremail) {
         this.paymentId = paymentid;
         this.status = status;
-        this.purchaseAt = purchaseat;
-        this.orderName = ordername;
+        this.paymentAt = purchaseat;
+        this.pointName = ordername;
         this.totalAmount = totalamount;
-        this.userEmail = useremail;
+        this.memberEmail = useremail;
     }
 
 }
