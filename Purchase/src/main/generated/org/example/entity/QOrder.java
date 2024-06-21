@@ -27,7 +27,7 @@ public class QOrder extends EntityPathBase<Order> {
 
     public final NumberPath<Integer> orderPrice = createNumber("orderPrice", Integer.class);
 
-    public final NumberPath<Long> productId = createNumber("productId", Long.class);
+    public final NumberPath<Long> PostId = createNumber("PostId", Long.class);
 
     public final StringPath sellerEmail = createString("sellerEmail");
 

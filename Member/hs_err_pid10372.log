@@ -737,30 +737,30 @@ java_class_path (initial): C:\Users\jj677\.gradle\wrapper\dists\gradle-8.5-bin\5
 Launcher Type: SUN_STANDARD
 
 [Global flags]
-     intx CICompilerCount                          = 3                                         {product} {ergonomic}
-   size_t CompressedClassSpaceSize                 = 322961408                                 {product} {ergonomic}
-     uint ConcGCThreads                            = 1                                         {product} {ergonomic}
-     uint G1ConcRefinementThreads                  = 4                                         {product} {ergonomic}
-   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
-    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+     intx CICompilerCount                          = 3                                         {Post} {ergonomic}
+   size_t CompressedClassSpaceSize                 = 322961408                                 {Post} {ergonomic}
+     uint ConcGCThreads                            = 1                                         {Post} {ergonomic}
+     uint G1ConcRefinementThreads                  = 4                                         {Post} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {Post} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {Post} {ergonomic}
      bool HeapDumpOnOutOfMemoryError               = true                                   {manageable} {command line}
-   size_t InitialHeapSize                          = 268435456                                 {product} {command line}
-   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
-   size_t MaxHeapSize                              = 536870912                                 {product} {command line}
-   size_t MaxMetaspaceSize                         = 402653184                                 {product} {command line}
-   size_t MaxNewSize                               = 321912832                                 {product} {ergonomic}
-   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
-   size_t MinHeapSize                              = 268435456                                 {product} {command line}
-    uintx NonNMethodCodeHeapSize                   = 5832780                                {pd product} {ergonomic}
-    uintx NonProfiledCodeHeapSize                  = 122912730                              {pd product} {ergonomic}
-    uintx ProfiledCodeHeapSize                     = 122912730                              {pd product} {ergonomic}
-    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
-     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t InitialHeapSize                          = 268435456                                 {Post} {command line}
+   size_t MarkStackSize                            = 4194304                                   {Post} {ergonomic}
+   size_t MaxHeapSize                              = 536870912                                 {Post} {command line}
+   size_t MaxMetaspaceSize                         = 402653184                                 {Post} {command line}
+   size_t MaxNewSize                               = 321912832                                 {Post} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {Post} {ergonomic}
+   size_t MinHeapSize                              = 268435456                                 {Post} {command line}
+    uintx NonNMethodCodeHeapSize                   = 5832780                                {pd Post} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122912730                              {pd Post} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122912730                              {pd Post} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd Post} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {Post} {ergonomic}
    size_t SoftMaxHeapSize                          = 536870912                              {manageable} {ergonomic}
-     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
-     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
-     bool UseG1GC                                  = true                                      {product} {ergonomic}
-     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {Post lp64_Post} {ergonomic}
+     bool UseCompressedOops                        = true                           {Post lp64_Post} {ergonomic}
+     bool UseG1GC                                  = true                                      {Post} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd Post} {ergonomic}
 
 Logging:
 Log output configuration:

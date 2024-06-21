@@ -6159,7 +6159,7 @@ instanceKlass org/yaml/snakeyaml/tokens/Token
 instanceKlass org/yaml/snakeyaml/scanner/ScannerImpl
 instanceKlass org/yaml/snakeyaml/reader/StreamReader
 instanceKlass org/yaml/snakeyaml/events/Event
-instanceKlass org/yaml/snakeyaml/parser/Production
+instanceKlass org/yaml/snakeyaml/parser/Postion
 instanceKlass org/yaml/snakeyaml/scanner/Scanner
 instanceKlass org/yaml/snakeyaml/parser/ParserImpl
 instanceKlass org/yaml/snakeyaml/composer/Composer

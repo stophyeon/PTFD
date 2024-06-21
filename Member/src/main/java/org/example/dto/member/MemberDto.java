@@ -17,7 +17,7 @@ public class MemberDto {
     private String email;
 
     @Schema(description = "이름",example = "김민우")
-    private String name;
+    private String userName;
 
     @Schema(description = "비밀번호",example = "영문,숫자,특수기호 포함8자리이상")
     private String password;
@@ -35,11 +35,11 @@ public class MemberDto {
     private int social_type;
 
     @Builder
-    public MemberDto(String email, String nickName,String image, String name,String password,int follower,int following,int point, int social_type){
+    public MemberDto(String email, String nickName,String image, String userName,String password,int follower,int following,int point, int social_type){
         this.email=email;
         this.nickName=nickName;
         this.image = image;
-        this.name=name;
+        this.userName=userName;
         this.password=password;
         this.follower=follower;
         this.following=following;

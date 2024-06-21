@@ -23,11 +23,11 @@ public class FollowRepositoryImpl implements FollowRepositoryCustom {
         QMember member = QMember.member;
         System.out.println("팔로워 멤버");
         return query.selectFrom(member)
-                .where(member.member_id.in(
+                .where(member.memberId.in(
                         JPAExpressions.select(follow.followerId)
                                 .from(member)
                                 .innerJoin(follow).on(member.nickName.eq(nickName))
-                                .where(follow.followingId.eq(member.member_id)))).fetch();
+                                .where(follow.followingId.eq(member.memberId)))).fetch();
     }
 
     @Override
@@ -36,10 +36,10 @@ public class FollowRepositoryImpl implements FollowRepositoryCustom {
         QMember member = QMember.member;
         System.out.println("팔로잉 멤버");
         return query.selectFrom(member)
-                .where(member.member_id.in(
+                .where(member.memberId.in(
                         JPAExpressions.select(follow.followingId)
                                 .from(member)
                                 .innerJoin(follow).on(member.nickName.eq(nickName))
-                                .where(follow.followerId.eq(member.member_id)))).fetch();
+                                .where(follow.followerId.eq(member.memberId)))).fetch();
     }
 }

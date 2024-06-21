@@ -25,11 +25,11 @@ public class OrderService {
         for (OrderSaveRequest orderSaveRequest : orderSaveRequestlist) {
 
             Order order = Order.builder()
-                    .orderPrice(orderSaveRequest.getProduct_point())
+                    .orderPrice(orderSaveRequest.getPost_point())
                     .orderAt(orderSaveRequest.getPurchase_at())
                     .consumerEmail(orderSaveRequest.getConsumer())
                     .sellerEmail(orderSaveRequest.getSeller())
-                    .productId(orderSaveRequest.getProduct_id())
+                    .postId(orderSaveRequest.getPost_id())
                     .build();
 
             orderRepository.save(order);

@@ -51,8 +51,8 @@ class PaymentServiceTest {
         PaymentsReq paymentReq = new PaymentsReq();
         paymentReq.setSeller("jj1234@naver.com");
         paymentReq.setConsumer("dealon25@naver.com");
-        paymentReq.setProduct_point(100);
-        paymentReq.setProduct_id(1L);
+        paymentReq.setPost_point(100);
+        paymentReq.setPost_id(1L);
         paymentReq.setPurchase_at(LocalDate.parse("2024-04-30"));
         List<PaymentsReq> paymentsList = Arrays.asList(paymentReq);
         validationRequest.setPayments_list(paymentsList);

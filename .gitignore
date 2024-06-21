@@ -38,6 +38,6 @@ out/
 ### VS Code ###
 .vscode/
 
-Product/src/main/generated/
+Post/src/main/generated/
 
 README.md

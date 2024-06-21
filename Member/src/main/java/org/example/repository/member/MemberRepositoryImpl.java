@@ -28,7 +28,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     public void updateInfo(Member member) {
         QMember qMember = QMember.member;
         query.update(qMember)
-                .set(qMember.name, member.getName())
+                .set(qMember.userName, member.getUserName())
                 .set(qMember.image, member.getImage())
                 .set(qMember.nickName,member.getNickName())
 
@@ -59,7 +59,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     @Override
     public Long findId(String email) {
         QMember member = QMember.member;
-        return query.select(member.member_id)
+        return query.select(member.memberId)
                 .from(member)
                 .where(member.email.eq(email)).fetchOne();
     }
@@ -76,7 +76,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     public List<Member> findAllById(List<Long> ids) {
         QMember member = QMember.member;
 
-        return query.selectFrom(member).where(member.member_id.in(ids)).fetch();
+        return query.selectFrom(member).where(member.memberId.in(ids)).fetch();
     }
 
     @Override

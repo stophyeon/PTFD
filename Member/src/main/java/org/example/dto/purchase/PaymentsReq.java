@@ -13,8 +13,8 @@ import java.time.LocalDate;
 public class PaymentsReq {
     private String seller;
     private String consumer;
-    private int product_point;
-    private Long product_id;
+    private int post_point;
+    private Long post_id;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate purchase_at;
 
