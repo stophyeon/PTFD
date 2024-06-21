@@ -28,12 +28,11 @@ public class Post {
     private String ImagePost;
 
     @Lob
-    @Column(name = "image_real")
-    private String ImageReal;
+    @Column(name = "credit")
+    private String credit;
 
-
-    @Column(name = "create_at")
-    private LocalDate createAt;
+    @Column(name = "start_at")
+    private LocalDate startAt;
 
     @Column(name="state")
     private int state=1;
@@ -41,47 +40,52 @@ public class Post {
     @Column(name = "category_id")
     private int categoryId;
 
-    @Column(name = "expiration_at")
-    private LocalDate expireAt;
+    @Column(name = "end_at")
+    private LocalDate endAt;
 
-    @Column(name = "nickname")
+    @Column(name = "nick_name")
     private String nickName;
 
-    @Column(name = "user_email")
-    private String userEmail;
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "user_profile")
     private String userProfile;
 
+    private int totalNumber;
+
+    private String postInfo;
 
     @Builder
-    public Post(Long postId,String postName, int price, String imagePost, String imageReal, LocalDate createAt, int categoryId, LocalDate expireAt, String nickName,String userProfile, String userEmail,int state) {
+    public Post(String credit,Long postId,String postName, int price, String imagePost, String postInfo,int totalNumber, LocalDate startAt, int categoryId, LocalDate endAt, String nickName,String userProfile, String email) {
         this.postId=postId;
         this.postName = postName;
         this.price = price;
         this.ImagePost = imagePost;
-        this.ImageReal = imageReal;
-        this.createAt = createAt;
+        this.postInfo=postInfo;
+        this.totalNumber=totalNumber;
+        this.startAt = startAt;
         this.categoryId = categoryId;
-        this.expireAt = expireAt;
+        this.endAt = endAt;
         this.nickName = nickName;
-        this.userEmail = userEmail;
+        this.email = email;
         this.userProfile=userProfile;
+        this.credit=credit;
     }
 
 
 
-    public static Post ToEntity(PostDto postDto,String userEmail){
+    public static Post ToEntity(PostDto postDto,String email){
         return Post.builder()
                 .categoryId(postDto.getCategory_id())
                 .postName(postDto.getPost_name())
-                .createAt(postDto.getCreate_at())
-                .expireAt(postDto.getExpire_at())
+                .startAt(postDto.getStart_at())
+                .endAt(postDto.getEnd_at())
                 .nickName(postDto.getNick_name())
-                .userEmail(userEmail)
+                .email(email)
+                .credit(postDto.getCredit())
                 .price(postDto.getPrice())
-                .imagePost(postDto.getImage_Post())
-                .imageReal(postDto.getImage_real())
+                .imagePost(postDto.getImage_post())
                 .userProfile(postDto.getUserProfile())
                 .build();
     }

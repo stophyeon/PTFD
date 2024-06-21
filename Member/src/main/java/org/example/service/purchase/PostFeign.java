@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @FeignClient(name = "postApi",url = "http://localhost:7080/Post")
-//@FeignClient(name = "postApi",url = "http://darakbang-Post-service-1:7080/Post")
+//@FeignClient(name = "postApi",url = "http://KPaaS-post-service-1:7080/Post")
 public interface PostFeign {
     @PostMapping("/payments/sell")
     public PostFeignRes SoldOut(@RequestBody PostFeignReq postFeignReq);

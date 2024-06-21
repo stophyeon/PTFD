@@ -8,11 +8,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PostForMessage {
     private String post_name;
-    private String image_real;
+
 
     @Builder
-    public PostForMessage(String postName, String image_real){
-        this.image_real=image_real;
+    public PostForMessage(String postName){
+
         this.post_name=postName;
     }
 }

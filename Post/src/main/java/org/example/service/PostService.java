@@ -50,8 +50,8 @@ public class PostService {
         String Post_file_name= storageService.imageUpload(img_Post);
         String real_file_name= storageService.imageUpload(img_real);
 
-        postDto.setImage_Post(googleURL+Post_file_name);
-        postDto.setImage_real(googleURL+real_file_name);
+        postDto.setImage_post(googleURL+Post_file_name);
+
         Post post = Post.ToEntity(postDto,email);
         postRepository.save(post);
         return new SuccessRes(post.getPostName(),"success");
@@ -81,7 +81,7 @@ public class PostService {
     @Transactional
     public SuccessRes deletePost(Long PostId, String email) throws IOException {
             Post Post = postRepository.findByPostId(PostId);
-            if (Post.getUserEmail().equals(email)) {
+            if (Post.getEmail().equals(email)) {
                 storageService.realImageDelete(PostId);
                 storageService.PostImageDelete(PostId);
                 postRepository.delete(Post);
@@ -114,7 +114,7 @@ public class PostService {
             postList.sort((o1,o2)->resultMap.get(o2).compareTo(resultMap.get(o1)));
             List<Post> topPosts = postList.stream().limit(Math.min(postList.size(),9)).toList();
             PostDetailRes PostDetailRes = new PostDetailRes();
-            PostDetailRes.setMe(selectedPost.getUserEmail().equals(email));
+            PostDetailRes.setMe(selectedPost.getEmail().equals(email));
             if (topPosts.isEmpty()) {
                 List<Post> categoryPostList = postRepository.findByPostCategory(selectedPost.getCategoryId(), postId,PageRequest.of(0,9)) ;
                 PostDetailRes.setPost(selectedPost);
@@ -135,9 +135,9 @@ public class PostService {
         Post post=postRepository.findByPostId(postId);
         if (post.getState()==-1 ||post.getState()==0){return new SuccessRes("","해당 상품이 없습니다");}
         else {
-            if (post.getUserEmail().equals(email)){
+            if (post.getEmail().equals(email)){
                 postRepository.updatePost(postId,postDto.getPost_name(),postDto.getPrice(),
-                        postDto.getCategory_id(), postDto.getExpire_at(), post.getImagePost(), post.getImageReal());
+                        postDto.getCategory_id(), postDto.getEnd_at(), post.getImagePost(), post.getPostInfo());
                 return new SuccessRes(post.getPostName(),"수정 성공");
             }
             else {return new SuccessRes(post.getPostName(),"등록한 이메일과 일치하지않습니다.");}
@@ -155,7 +155,7 @@ public class PostService {
         Post post=postRepository.findByPostId(postId);
         log.info(post.getPostName());
         return PostForMessage.builder()
-                .image_real(post.getImageReal())
+
                 .postName(post.getPostName())
                 .build();
     }
