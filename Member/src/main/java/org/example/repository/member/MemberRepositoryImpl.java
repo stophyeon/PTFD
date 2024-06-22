@@ -29,7 +29,7 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
         QMember qMember = QMember.member;
         query.update(qMember)
                 .set(qMember.userName, member.getUserName())
-                .set(qMember.image, member.getImage())
+                .set(qMember.profileImage, member.getProfileImage())
                 .set(qMember.nickName,member.getNickName())
 
                 .where(qMember.email.eq(member.getEmail())).execute();

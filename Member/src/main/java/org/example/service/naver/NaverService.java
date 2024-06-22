@@ -67,10 +67,10 @@ public class NaverService {
 
         MemberDto memberDto =MemberDto.builder()
                 .email(response.get("email").toString())
-                .image(response.get("profile_image").toString())
+                .profileImage(response.get("profile_image").toString())
                 .userName(response.get("name").toString())
                 .password(passwordEncoder.encode("default1234"))
-                .social_type(2)
+                .socialType(2)
                 .build();
 
         Optional<Member> member = memberRepository.findByEmail(memberDto.getEmail());

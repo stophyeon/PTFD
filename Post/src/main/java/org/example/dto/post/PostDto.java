@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 
 public class PostDto {
-
     private Long post_id;
 
     private String post_name;

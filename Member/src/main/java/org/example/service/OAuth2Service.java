@@ -67,7 +67,7 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest,OAuth2
         MemberDto memberDto = new MemberDto();
         memberDto.setEmail(customAttribute.get("email").toString());
         memberDto.setNickName(customAttribute.get("name").toString());
-        memberDto.setImage(customAttribute.get("image").toString());
+        memberDto.setProfileImage(customAttribute.get("image").toString());
         Member member = Member.builder()
                 .memberDto(memberDto)
                 .build();

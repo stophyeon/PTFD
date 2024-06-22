@@ -5,6 +5,8 @@ import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.annotation.TimeCheck;
+import org.example.dto.follow.FollowerDto;
+import org.example.dto.follow.FollowingDto;
 import org.example.dto.member.MemberDto;
 import org.example.entity.Follow;
 import org.example.entity.Member;
@@ -30,7 +32,7 @@ public class FollowService {
 
         Member following_member = memberRepository.findByEmail(email).get();
         Member follower_member = memberRepository.findByEmail(MyEmail).get();
-        if (!followRepository.existsByFollowingIdAndFollowerId(follower_member.getMemberId(),follower_member.getMemberId())){
+        if (!followRepository.existsByFollowingIdAndFollowerId(following_member.getMemberId(),follower_member.getMemberId())){
             Follow follow = Follow.builder()
                     .followingId(following_member.getMemberId())
                     .followerId(follower_member.getMemberId())
@@ -48,14 +50,14 @@ public class FollowService {
     }
 
     @TimeCheck
-    public List<MemberDto> getFollower(String nickName){
-        return followRepository.findFollower(nickName).stream().map(Member::toDto).toList();
+    public FollowerDto getFollower(String nickName){
+        return FollowerDto.builder().followers(followRepository.findFollower(nickName).stream().map(Member::toDto).toList()).build();
 
     }
 
     @TimeCheck
-    public List<MemberDto> getFollowing(String nickName){
-        return followRepository.findFollowing(nickName).stream().map(Member::toDto).toList();
+    public FollowingDto getFollowing(String nickName){
+        return FollowingDto.builder().followings(followRepository.findFollowing(nickName).stream().map(Member::toDto).toList()).build();
     }
 
 

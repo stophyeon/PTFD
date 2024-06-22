@@ -14,42 +14,28 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
     private Long postId ;
 
-    @Column(name = "post_name")
     private String postName;
 
-    @Column(name = "price")
-    private int price ;
+    private int price;
 
-    @Lob
-    @Column(name = "image_Post")
-    private String ImagePost;
+    private String imagePost;
 
-    @Lob
-    @Column(name = "credit")
     private String credit;
 
-    @Column(name = "start_at")
     private LocalDate startAt;
 
-    @Column(name="state")
     private int state=1;
 
-    @Column(name = "category_id")
     private int categoryId;
 
-    @Column(name = "end_at")
     private LocalDate endAt;
 
-    @Column(name = "nick_name")
     private String nickName;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "user_profile")
     private String userProfile;
 
     private int totalNumber;
@@ -61,7 +47,7 @@ public class Post {
         this.postId=postId;
         this.postName = postName;
         this.price = price;
-        this.ImagePost = imagePost;
+        this.imagePost = imagePost;
         this.postInfo=postInfo;
         this.totalNumber=totalNumber;
         this.startAt = startAt;
