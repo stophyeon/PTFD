@@ -33,7 +33,7 @@ public class SchedulerService {
         {
             List<Post> deletePostList = postRepository.findPostsExpiredOrSelled();
             for (Post deletePost : deletePostList) {
-                postService.deletePost(deletePost.getPostId(), deletePost.getUserEmail());
+                postService.deletePost(deletePost.getPostId(), deletePost.getEmail());
             }
             log.info("data more than limit, cleaning start.");
         }
@@ -53,7 +53,7 @@ public class SchedulerService {
         {
             List<Post> deletePostList = postRepository.findPostsExpiredOrSelled();
             for (Post deletePost : deletePostList) {
-                postService.deletePost(deletePost.getPostId(), deletePost.getUserEmail());
+                postService.deletePost(deletePost.getPostId(), deletePost.getEmail());
             }
             log.info("data more than limit, cleaning start.");
         }

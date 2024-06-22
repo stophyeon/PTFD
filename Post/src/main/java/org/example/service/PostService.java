@@ -1,11 +1,8 @@
 package org.example.service;
 
-
-
-
 import org.example.annotation.TimeCheck;
-import org.example.dto.post.PostDetailRes;
 import org.example.dto.SuccessRes;
+import org.example.dto.post.PostDetailRes;
 import org.example.dto.post.PostDto;
 import org.example.dto.post.PostForMessage;
 import org.example.dto.wish_list.EmailDto;
@@ -39,7 +36,7 @@ public class PostService {
     private final StorageService storageService;
     private final String googleURL = "https://storage.googleapis.com/darakbang-img/";
 
-    public SuccessRes addPost(PostDto postDto, String email, MultipartFile img_Post, MultipartFile img_real) throws IOException {
+    public SuccessRes addPost(PostDto postDto, String email, MultipartFile img_Post) throws IOException {
         String nickName= memberFeign.getNickName(email);
         String profile = memberFeign.getProfile(email);
         postDto.setNick_name(nickName);
@@ -48,7 +45,6 @@ public class PostService {
         InputStream keyFile = ResourceUtils.getURL("classpath:darakbang-422004-c04b80b50e78.json" ).openStream();
 
         String Post_file_name= storageService.imageUpload(img_Post);
-        String real_file_name= storageService.imageUpload(img_real);
 
         postDto.setImage_post(googleURL+Post_file_name);
 
@@ -59,7 +55,7 @@ public class PostService {
 
     @Transactional
     public Page<PostDto> findPostPage (int page,String nickName){
-        Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Direction.ASC, "PostId"));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Direction.ASC, "postId"));
         Page<Post> postPage = postRepository.findAll(pageable);
         Page<PostDto> posts=postPage.map(PostDto::ToDto);
         if (nickName!=null) {
@@ -73,7 +69,7 @@ public class PostService {
 
     @Transactional
     public Page<PostDto> findMyPostPage (String nickName,int page){
-        Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Direction.ASC, "PostId"));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Direction.ASC, "postId"));
         Page<Post> PostPage = postRepository.findAllByNickName(pageable,nickName);
         return PostPage.map(PostDto::ToDto);
     }
@@ -82,7 +78,6 @@ public class PostService {
     public SuccessRes deletePost(Long PostId, String email) throws IOException {
             Post Post = postRepository.findByPostId(PostId);
             if (Post.getEmail().equals(email)) {
-                storageService.realImageDelete(PostId);
                 storageService.PostImageDelete(PostId);
                 postRepository.delete(Post);
                 return new SuccessRes(Post.getPostName(), "삭제 성공");
@@ -131,7 +126,6 @@ public class PostService {
 
     @Transactional
     public SuccessRes updatePost(Long postId, PostDto postDto,String email) throws IOException {
-
         Post post=postRepository.findByPostId(postId);
         if (post.getState()==-1 ||post.getState()==0){return new SuccessRes("","해당 상품이 없습니다");}
         else {
@@ -143,21 +137,20 @@ public class PostService {
             else {return new SuccessRes(post.getPostName(),"등록한 이메일과 일치하지않습니다.");}
         }
     }
+
     @Transactional
     public void changeState(List<Long> postIds){
         for (Long postId : postIds){
             postRepository.updateState(-1, postId);
         }
     }
-    @Transactional
-    public PostForMessage realImage(Long postId){
-        log.info("구매 상품 전송 로직");
-        Post post=postRepository.findByPostId(postId);
-        log.info(post.getPostName());
-        return PostForMessage.builder()
 
-                .postName(post.getPostName())
-                .build();
+    @Transactional
+    public PostForMessage sendReservation(Long postId){
+        log.info("구매 상품 전송 로직");
+        PostForMessage post=postRepository.findImagePostAndPostNameByPostId(postId);
+        log.info(post.getPost_name());
+        return post;
     }
 
 

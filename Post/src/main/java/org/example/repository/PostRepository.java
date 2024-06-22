@@ -1,6 +1,8 @@
 package org.example.repository;
 
 import jakarta.persistence.LockModeType;
+
+import org.example.dto.post.PostForMessage;
 import org.example.entity.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,20 +22,23 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     Post findByPostId(Long id);
 
+    PostForMessage findImagePostAndPostNameByPostId(Long postId);
+
     @Modifying
     @Query("update Post p set p.postName = :post_name, " +
             "p.price = :price, " +
-            "p.ImagePost = :image_Post, p.ImageReal = :image_real, " +
+            "p.imagePost = :image_post, " +
+            "p.postInfo = :post_info, " +
             "p.categoryId = :category_id, " +
-            "p.expireAt = :expire_at " +
+            "p.endAt = :end_at " +
             "where p.postId = :post_id")
     void updatePost(@Param("post_id") Long postId,
                        @Param("post_name") String postName,
                        @Param("price") int price,
                        @Param("category_id") int categoryId,
-                       @Param("expire_at") LocalDate expireAt,
-                       @Param("image_Post") String imagePost,
-                       @Param("image_real") String imageReal);
+                       @Param("end_at") LocalDate expireAt,
+                       @Param("image_post") String imagePost,
+                       @Param("post_info")String postIfo);
 
     Page<Post> findAll(Pageable pageable);
 
@@ -56,7 +61,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     void deleteByPostIdIn(List<Long> postIds);
 
-    @Query("SELECT p FROM Post p WHERE p.postName LIKE %:postName% AND p.state = 1 ORDER BY p.createAt DESC")
+    @Query("SELECT p FROM Post p WHERE p.postName LIKE %:postName% AND p.state = 1 ORDER BY p.startAt DESC")
     Page<Post> findByPostNameAndStateOrderByCreateAtDesc(@Param("postName") String postName, Pageable pageable);
 
     @Query("SELECT p FROM Post p WHERE p.postName LIKE %:postName%")
@@ -68,14 +73,14 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     int countTuple() ; //Post 인스턴스 수 세기
 
     @Modifying
-    @Query("UPDATE Post p SET p.state = 0 where p.expireAt <= CURRENT_DATE")
+    @Query("UPDATE Post p SET p.state = 0 where p.endAt <= CURRENT_DATE")
     void updatePostsStateForExpiredPosts();
 
     @Query("Select p FROM Post p WHERE p.state in (-1,0)")
     List<Post> findPostsExpiredOrSelled();
 
-    @Query("SELECT p.ImageReal FROM Post p WHERE p.postId = :post_id")
-    String findImageRealByPostId(@Param("post_id") Long post_id);
+    @Query("SELECT p.imagePost FROM Post p WHERE p.postId = :post_id")
+    String findImagePostByPostId(@Param("post_id") Long post_id);
 
 
 

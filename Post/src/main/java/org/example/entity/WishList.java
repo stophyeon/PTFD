@@ -16,7 +16,7 @@ public class WishList {
     private Long wishListId;
 
     @ManyToOne
-    @JoinColumn(name = "post")
+    @JoinColumn(name = "post_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 

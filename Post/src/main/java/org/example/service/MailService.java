@@ -30,7 +30,7 @@ public class MailService {
     @Value("${spring.mail.username}")
     private String mailSenderId ;
 
-    public String sendRealImgEmail(List<PaymentsReq> paymentsReqList, String consumer_email) {
+    public String sendEmail(List<PaymentsReq> paymentsReqList, String consumer_email) {
         try {
 
             for (PaymentsReq paymentReq : paymentsReqList) {
@@ -40,12 +40,12 @@ public class MailService {
                 // 수신자
                 mimeMessageHelper.setTo(consumer_email);
                 // 제목
-                mimeMessageHelper.setSubject("Darakbang 구매내역입니다.");
+                mimeMessageHelper.setSubject("예약되었습니다.");
                 // 본문
-                mimeMessageHelper.setText("구매 감사드립니다.");
+                mimeMessageHelper.setText("이용해주셔서 감사드립니다.");
 
                 // 이미지 ->datasource로 변경.
-                URL imageUrl = new URL(postRepository.findImageRealByPostId(paymentReq.getPost_id()));
+                URL imageUrl = new URL(postRepository.findImagePostByPostId(paymentReq.getPost_id()));
                 byte[] imageData = IOUtils.toByteArray(imageUrl);
                 DataSource dataSource = new ByteArrayDataSource(imageData, "image/jpeg");
                 mimeMessageHelper.addAttachment("darakbang.jpg", dataSource);
