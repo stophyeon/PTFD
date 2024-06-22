@@ -66,9 +66,9 @@ public class MemberController {
             summary = "나의 프로필"
     )
     public MemberDto myProfile(@PathVariable("email")String email){
-
         return memberService.myProfile(email);
     }
+
     @GetMapping("/profile/other/{nick_name}/{email}")
     @Operation(
             operationId = "other's profile",

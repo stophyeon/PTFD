@@ -22,14 +22,15 @@ public class Member {
     private String userName;
     private String password;
     private String nickName;
-    private String image;
+    private String profileImage;
     @ColumnDefault("0")
     private int follower;
     @ColumnDefault("0")
     private int following;
     private int point;
     private String role;
-    private int socialType; //0일반 1카카오 2네이버
+    private int socialType;//0일반 1카카오 2네이버
+    private String memberInfo;
 
     @Builder
     public Member(MemberDto memberDto){
@@ -37,19 +38,23 @@ public class Member {
         this.password= memberDto.getPassword();
         this.nickName= memberDto.getNickName();
         this.userName= memberDto.getUserName();
-        this.image=memberDto.getImage();
+        this.profileImage =memberDto.getProfileImage();
         this.point= memberDto.getPoint();
-        this.socialType = memberDto.getSocial_type();
+        this.socialType = memberDto.getSocialType();
+        this.memberInfo=memberDto.getMemberInfo();
+        this.role=memberDto.getRole();
     }
     public static MemberDto toDto(Member member){
         return MemberDto.builder()
                 .email(member.getEmail())
                 .userName(member.getUserName())
                 .nickName(member.getNickName())
-                .image(member.getImage())
+                .profileImage(member.getProfileImage())
                 .follower(member.follower)
                 .following(member.following)
                 .point(member.getPoint())
+                .memberInfo(member.getMemberInfo())
+                .role(member.getRole())
                 .build();
     }
 

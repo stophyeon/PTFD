@@ -48,11 +48,14 @@ public class MemberService {
     public SignUpRes join(MemberDto memberDto, MultipartFile profileImg) throws IOException {
             if(!profileImg.isEmpty()){
                 String file_name=storageService.imageUpload(profileImg);
-                memberDto.setImage(googleURL+file_name);
+                memberDto.setProfileImage(googleURL+file_name);
+            }
+            if(duplicateEmail(memberDto.getEmail())){
+                return SignUpRes.builder().message("이미 가입된 회원입니다").state("중복 가입").build();
             }
             memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
 
-            memberDto.setSocial_type(0);
+            memberDto.setSocialType(0);
 
             Member member = Member.builder()
                     .memberDto(memberDto)
@@ -110,7 +113,7 @@ public class MemberService {
     public String profileImg(String email){
         Optional<Member> member = memberRepository.findByEmail(email);
         member.orElseThrow();
-        return member.get().getImage();
+        return member.get().getProfileImage();
     }
 
     public boolean duplicateNickName(String nickName){
@@ -131,7 +134,7 @@ public class MemberService {
         Optional<Member> member = memberRepository.findByEmail(email);
         member.orElseThrow();
         String file_name=storageService.imageUpload(profileImg);
-        memberDto.setImage(googleURL+file_name);
+        memberDto.setProfileImage(googleURL+file_name);
         storageService.imageDelete(email);
         memberRepository.updateInfo(Member.builder().memberDto(memberDto).build());
         return ExceptionResponse.builder()

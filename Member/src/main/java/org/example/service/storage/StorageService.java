@@ -56,7 +56,7 @@ public class StorageService {
     public void imageDelete(String email) throws IOException {
         Optional<Member> member = memberRepository.findByEmail(email);
         member.orElseThrow();
-        String img = member.get().getImage().substring(44);
+        String img = member.get().getProfileImage().substring(44);
         InputStream keyFile = ResourceUtils.getURL("classpath:darakbang-422004-c04b80b50e78.json" ).openStream();
         Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
         Blob blob = storage.get(bucketName, img);

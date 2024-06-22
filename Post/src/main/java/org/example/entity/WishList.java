@@ -13,11 +13,10 @@ public class WishList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "wishlist_id")
     private Long wishListId;
 
     @ManyToOne
-    @JoinColumn(name = "Post")
+    @JoinColumn(name = "post")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 

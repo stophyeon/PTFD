@@ -78,7 +78,7 @@ public class PostController {
             @ApiResponse(responseCode = "403", description = "접근자와 게시글 작성자가 다릅니다")
     })
     @Parameters(
-            @Parameter(name = "상품 객체", description = "state,Post_id,image 제외한 나머지 속성들")
+            @Parameter(name = "상품 객체", description = "state,Post_id,profileImage 제외한 나머지 속성들")
     )
     @PutMapping("/{post_id}/{email}")
     public ResponseEntity<SuccessRes> changePost(@PathVariable("email") String email,

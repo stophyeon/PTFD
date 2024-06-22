@@ -3,6 +3,8 @@ package org.example.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.example.dto.follow.FollowerDto;
+import org.example.dto.follow.FollowingDto;
 import org.example.dto.member.MemberDto;
 import org.example.dto.follow.FollowDto;
 import org.example.service.FollowService;
@@ -31,7 +33,7 @@ public class FollowController {
             operationId = "follower view",
             summary = "팔로워 사용자 조회"
     )
-    public List<MemberDto> follower(@PathVariable("nick_name") String nickName){
+    public FollowerDto follower(@PathVariable("nick_name") String nickName){
         return followService.getFollower(nickName);
     }
 
@@ -40,7 +42,7 @@ public class FollowController {
             operationId = "following view",
             summary = "팔로윙한 사용자 조회"
     )
-    public List<MemberDto> following(@PathVariable("nick_name") String nickName){
+    public FollowingDto following(@PathVariable("nick_name") String nickName){
         return followService.getFollowing(nickName);
     }
 

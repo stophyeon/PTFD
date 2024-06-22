@@ -76,11 +76,11 @@ public class KakaoService {
         JSONObject properties=(JSONObject) jsonObject.get("properties");
         MemberDto memberDto =MemberDto.builder()
                 .email(kakaoAccount.get("email").toString())
-                .image(properties.get("profile_image").toString())
+                .profileImage(properties.get("profile_image").toString())
                 .nickName(properties.get("nickname").toString())
                 .userName(properties.get("nickname").toString())
                 .password(passwordEncoder.encode("default1234"))
-                .social_type(1)
+                .socialType(1)
                 .build();
         log.info(passwordEncoder.encode("default1234"));
         Optional<Member> member = memberRepository.findByEmail(memberDto.getEmail());
