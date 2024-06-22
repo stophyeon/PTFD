@@ -63,6 +63,8 @@ public class Post {
 
     public static Post ToEntity(PostDto postDto,String email){
         return Post.builder()
+                .postInfo(postDto.getPost_info())
+                .totalNumber(postDto.getTotal_number())
                 .categoryId(postDto.getCategory_id())
                 .postName(postDto.getPost_name())
                 .startAt(postDto.getStart_at())

@@ -51,10 +51,11 @@ public class PostController {
     @PostMapping("/{email}")
     public ResponseEntity<SuccessRes> savePost(@PathVariable("email") String email,
                                                   @RequestPart("req") PostDto PostDto,
-                                                  @RequestPart("img_Post") MultipartFile img_Post,
-                                                  @RequestPart("img_real") MultipartFile img_real) throws IOException {
+                                                  @RequestPart("img_post") MultipartFile img_post
+
+                                                 ) throws IOException {
         log.info("상품 등록");
-        return ResponseEntity.ok(postService.addPost(PostDto,email,img_Post,img_real));
+        return ResponseEntity.ok(postService.addPost(PostDto,email,img_post));
     }
     @Operation(summary = "상품 게시글 삭제")
     @ApiResponses(value = {
@@ -119,11 +120,11 @@ public class PostController {
             @ApiResponse(responseCode = "404", description = "NULL 관련 문제 발생"),
             @ApiResponse(responseCode = "400", description = "상품 게시글 조회 중 문제 발생")
     })
-
     @GetMapping("/detail/{post_id}/{email}")
-    public ResponseEntity<PostDetailRes> getPost(@PathVariable("post_id") Long postId,@PathVariable("email") String email) {
+    public ResponseEntity<PostDetailRes> getPost(@PathVariable("post_id") Long postId, @PathVariable("email") String email) {
         return ResponseEntity.ok(postService.findPostDetail(postId,email));
     }
+
     @Operation(
             operationId = "like",
             description = "좋아요 상품 등록 요청",
@@ -153,6 +154,7 @@ public class PostController {
     public ResponseEntity<SuccessRes> deleteLikePost( @PathVariable("post_id") Long postId, @PathVariable("email") String email){
         return ResponseEntity.ok(wishListService.delLikePost(email,postId));
     }
+
     @PostMapping("/payments/sell")
     public PurchaseDto changeState(@RequestBody SellDto sellDto){
         int soldOut=wishListService.sellWishList(sellDto.getPost_id(),sellDto.getEmail());
@@ -175,12 +177,12 @@ public class PostController {
     }
     @PostMapping("/real_image")
     public PostForMessage getRealImage(@RequestParam("post_id") Long PostId){
-        return postService.realImage(PostId);
+        return postService.sendReservation(PostId);
     }
 
     @PostMapping("/emails/{consumer_email}")
     public ResponseEntity<String> SendEmail(@RequestBody List<PaymentsReq> paymentsReqList, @PathVariable("consumer_email") String consumer_email)
     {
-        return ResponseEntity.ok(mailService.sendRealImgEmail(paymentsReqList,consumer_email));
+        return ResponseEntity.ok(mailService.sendEmail(paymentsReqList,consumer_email));
     }
 }

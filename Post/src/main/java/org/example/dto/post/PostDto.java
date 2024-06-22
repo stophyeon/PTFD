@@ -1,5 +1,6 @@
 package org.example.dto.post;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.example.entity.Post;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,6 +33,7 @@ public class PostDto {
     private LocalDate end_at;
     private boolean like=false;
     private String nick_name;
+    @JsonProperty("user_profile")
     private String userProfile;
     private String credit;
     @Builder

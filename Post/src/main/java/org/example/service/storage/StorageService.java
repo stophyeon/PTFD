@@ -69,25 +69,7 @@ public class StorageService {
             storage.delete(bucketName, imgPost, precondition);
 
     }
-    public void realImageDelete(Long PostId) throws IOException {
-        Post Post = PostRepository.findByPostId(PostId);
 
-        String imgReal = Post.getImageReal().substring(45);
-        log.info(imgReal);
-
-        InputStream keyFile = ResourceUtils.getURL("classpath:darakbang-422004-c04b80b50e78.json" ).openStream();
-        Storage storage = StorageOptions.newBuilder()
-                .setCredentials(GoogleCredentials.fromStream(keyFile))
-                .build()
-                .getService();
-
-        Blob blobReal = storage.get(bucketName, imgReal);
-
-        Storage.BlobSourceOption precondition =
-                Storage.BlobSourceOption.generationMatch(blobReal.getGeneration());
-        storage.delete(bucketName, imgReal, precondition);
-
-    }
     private static String changedImageName(String originName) {
         String random = UUID.randomUUID().toString();
         return random+originName;
