@@ -51,12 +51,12 @@ public class PostController {
     @PostMapping("/{email}")
     public ResponseEntity<SuccessRes> savePost(@PathVariable("email") String email,
                                                   @RequestPart("req") PostDto PostDto,
-                                                  @RequestPart("img_post") MultipartFile img_post
-
+                                                  @RequestPart("img") MultipartFile img_post
                                                  ) throws IOException {
         log.info("상품 등록");
         return ResponseEntity.ok(postService.addPost(PostDto,email,img_post));
     }
+
     @Operation(summary = "상품 게시글 삭제")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "상품 게시글 삭제 성공"),
@@ -175,8 +175,8 @@ public class PostController {
     public ResponseEntity<Page<PostDto>> searchFullWord(@RequestBody SearchDto searchDto, @RequestParam(name = "page",required = false,defaultValue = "1") int page){
         return ResponseEntity.ok(searchService.searchPost(searchDto.getPost_name(), page-1));
     }
-    @PostMapping("/real_image")
-    public PostForMessage getRealImage(@RequestParam("post_id") Long PostId){
+    @PostMapping("/image")
+    public PostForMessage getImage(@RequestParam("post_id") Long PostId){
         return postService.sendReservation(PostId);
     }
 

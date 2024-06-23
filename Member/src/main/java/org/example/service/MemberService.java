@@ -112,8 +112,8 @@ public class MemberService {
 
     public String profileImg(String email){
         Optional<Member> member = memberRepository.findByEmail(email);
-        member.orElseThrow();
-        return member.get().getProfileImage();
+
+        return member.map(Member::getProfileImage).orElse(null);
     }
 
     public boolean duplicateNickName(String nickName){
@@ -126,8 +126,8 @@ public class MemberService {
 
     public String getNickName(String email){
         Optional<Member> member = memberRepository.findByEmail(email);
-        member.orElseThrow();
-        return member.get().getNickName();
+        return member.map(Member::getNickName).orElse(null);
+
     }
 
     public ExceptionResponse updateProfile(MultipartFile profileImg, MemberDto memberDto, String email) throws IOException {
@@ -148,6 +148,7 @@ public class MemberService {
     }
 
     public String getEmail(String nickName){
-        return memberRepository.findEmailByNickName(nickName).getEmail();
+        Optional<Member> member = memberRepository.findEmailByNickName(nickName);
+        return member.map(Member::getEmail).orElse(null);
     }
 }

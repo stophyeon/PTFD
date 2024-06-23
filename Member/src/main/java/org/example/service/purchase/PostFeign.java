@@ -15,8 +15,8 @@ public interface PostFeign {
     @PostMapping("/payments/sell")
     public PostFeignRes SoldOut(@RequestBody PostFeignReq postFeignReq);
 
-    @PostMapping(value = "/real_image",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public MessageRes getRealImage(@RequestParam("post_id") Long postId);
+    @PostMapping(value = "/image",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public MessageRes getImage(@RequestParam("post_id") Long postId);
     @PostMapping("/emails/{consumer_email}")
     public String SendEmail(@RequestBody List<PaymentsReq> paymentsReqList, @PathVariable("consumer_email") String consumer_email);
 

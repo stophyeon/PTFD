@@ -13,6 +13,7 @@ import org.example.repository.PostRepository;
 import org.example.service.member.MemberFeign;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -40,9 +41,11 @@ public class WishListService {
         }
     }
     public WishListDto showLikePost(String nickName){
-        EmailDto email = memberFeign.getEmail(nickName);
-        log.info(email.getEmail());
-        Optional<List<WishList>> likePosts = wishListRepository.findAllByEmail(email.getEmail());
+        Optional<EmailDto> email = memberFeign.getEmail(nickName);
+        if (email.get().getEmail()==null){return WishListDto.builder().message("존재하지 않는 회원입니다").build();}
+
+        log.info(email.get().getEmail());
+        Optional<List<WishList>> likePosts = wishListRepository.findAllByEmail(email.get().getEmail());
         likePosts.orElseThrow();
         List<Post> Posts = likePosts.get().stream().map(WishList::getPost).toList();
         return WishListDto.builder()
@@ -57,13 +60,13 @@ public class WishListService {
         if (post.getState()==-1 ||post.getState()==0){
             return SuccessRes.builder()
                     .postName(post.getPostName())
-                    .message("판매완료, 기간 만료된 상품")
+                    .message("기간이 만료되거나 신청불가능한 수업입니다.")
                     .build();
         }
         wishListRepository.deleteByEmailAndPost(email,post);
         return SuccessRes.builder()
                 .postName(post.getPostName())
-                .message("좋아요 등록 상품 삭제 성공")
+                .message("좋아요 등록 수업 삭제 성공")
                 .build();
 
     }

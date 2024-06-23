@@ -37,10 +37,12 @@ public class PostService {
     private final String googleURL = "https://storage.googleapis.com/darakbang-img/";
 
     public SuccessRes addPost(PostDto postDto, String email, MultipartFile img_Post) throws IOException {
-        String nickName= memberFeign.getNickName(email);
-        String profile = memberFeign.getProfile(email);
-        postDto.setNick_name(nickName);
-        postDto.setUserProfile(profile);
+        Optional<String> nickName= memberFeign.getNickName(email);
+        Optional<String> profile = memberFeign.getProfile(email);
+        nickName.orElseThrow();
+        profile.orElseThrow();
+        postDto.setNick_name(nickName.get());
+        postDto.setUserProfile(profile.get());
         // 이미지 구글 클라우드 저장
         InputStream keyFile = ResourceUtils.getURL("classpath:darakbang-422004-c04b80b50e78.json" ).openStream();
 
@@ -59,8 +61,9 @@ public class PostService {
         Page<Post> postPage = postRepository.findAll(pageable);
         Page<PostDto> posts=postPage.map(PostDto::ToDto);
         if (nickName!=null) {
-            EmailDto email = memberFeign.getEmail(nickName);
-            List<PostDto> wishs = wishListRepository.findAllByEmail(email.getEmail()).get().stream().map(WishList::getPost).toList()
+            Optional<EmailDto> email = memberFeign.getEmail(nickName);
+            email.orElseThrow();
+            List<PostDto> wishs = wishListRepository.findAllByEmail(email.get().getEmail()).get().stream().map(WishList::getPost).toList()
                     .stream().map(PostDto::ToDto).toList();
             posts.forEach(p -> p.setLike(wishs.contains(p)));
         }
@@ -141,7 +144,12 @@ public class PostService {
     @Transactional
     public void changeState(List<Long> postIds){
         for (Long postId : postIds){
-            postRepository.updateState(-1, postId);
+            Post post = postRepository.findByPostId(postId);
+            if(post.getTotalNumber()-1>0){ postRepository.updateTotalNumber(post.getTotalNumber()-1,postId);}
+            else{
+                postRepository.updateTotalNumber(0,postId);
+                postRepository.updateState(-1,postId);
+            }
         }
     }
 
