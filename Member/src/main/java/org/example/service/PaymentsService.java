@@ -70,6 +70,7 @@ public class PaymentsService {
                         log.info("카카오 회원");
                         sendMessage(paymentsReq.getPost_id());
                     }
+                    postFeign.SendEmailToSeller(purchaseDto.getPayments_list());
                 }
                 else if (consumer.get().getSocialType() == 0 ) //일반 회원가입 유저라면
                 {
