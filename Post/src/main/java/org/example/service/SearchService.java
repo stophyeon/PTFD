@@ -28,9 +28,8 @@ public class SearchService {
     }
     @TimeCheck
     public Page<PostDto> searchPost(String postName,int page){
-        Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Direction.ASC, "PostName"));
+        Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Direction.ASC, "postName"));
         Page<Post> Posts=postRepository.findByPostNameAndStateOrderByCreateAtDesc(postName,pageable);
-
         List<PostDto> p  = Posts.stream().map(PostDto::ToDto).toList();
         log.info(p.toString());
         return new PageImpl<>(p);

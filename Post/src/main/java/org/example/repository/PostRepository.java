@@ -67,7 +67,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p WHERE p.postName LIKE %:postName%")
     List<Post> findByPostName(@Param("postName") String PostName);
 
-
+    @Modifying
+    @Query("UPDATE Post p SET p.totalNumber=%:totalNumber% where p.postId=%:postId%")
+    void updateTotalNumber(@Param("totalNumber")int totalNumber,@Param("postId")Long postId);
 
     @Query("select count(*) from Post p ")
     int countTuple() ; //Post 인스턴스 수 세기

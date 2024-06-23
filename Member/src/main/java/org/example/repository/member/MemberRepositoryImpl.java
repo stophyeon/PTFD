@@ -69,7 +69,6 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     public void updatePoint(int point,String email) {
         QMember qMember = QMember.member;
          query.update(qMember).set(qMember.point,point).where(qMember.email.eq(email)).execute();
-
     }
 
     @Override

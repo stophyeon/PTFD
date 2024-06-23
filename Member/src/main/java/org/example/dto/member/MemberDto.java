@@ -23,11 +23,8 @@ public class MemberDto {
     @Schema(description = "비밀번호",example = "영문,숫자,특수기호 포함8자리이상")
     private String password;
 
-
     @Schema(description = "프로필 사진")
-
     private String profileImage;
-
 
     @Schema(description = "닉네임")
     private String nickName;
