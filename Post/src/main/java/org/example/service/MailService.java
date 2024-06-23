@@ -36,23 +36,35 @@ public class MailService {
             for (PaymentsReq paymentReq : paymentsReqList) {
                 MimeMessage mimeMessage = javaMailSender.createMimeMessage();
                 MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-
                 // 수신자
                 mimeMessageHelper.setTo(consumer_email);
                 // 제목
-                mimeMessageHelper.setSubject("예약되었습니다.");
-                // 본문
-                mimeMessageHelper.setText("이용해주셔서 감사드립니다.");
+                mimeMessageHelper.setSubject("신청하신 PT가 예약되었습니다.");
 
                 // 이미지 ->datasource로 변경.
                 URL imageUrl = new URL(postRepository.findImagePostByPostId(paymentReq.getPost_id()));
                 byte[] imageData = IOUtils.toByteArray(imageUrl);
+
+                String htmlContentWithInlineImage = "<html><body>"
+                        + "<img src='cid:image_reservation' style='width: 100px; height: auto;'/>"
+                        + "<p>사이트를 이용해주셔서 감사합니다.</p>"
+                        + "<p>대표 전화번호: 010-8852-6778</p>"
+                        + "<p>대표 이메일: darakbang0414@naver.com</p>"
+                        + "<p>행복한 PT 되시기를 기원하겠습니다.</p>"
+                        + "</body></html>";
+
+                mimeMessageHelper.setText(htmlContentWithInlineImage, true);
+
                 DataSource dataSource = new ByteArrayDataSource(imageData, "image/jpeg");
-                mimeMessageHelper.addAttachment("darakbang.jpg", dataSource);
+                mimeMessageHelper.addInline("image_reservation", dataSource);
                 // 이메일 발신자 설정
                 mimeMessageHelper.setFrom(new InternetAddress(mailSenderId+"@naver.com"));
-
                 // 이메일 보내기
+                javaMailSender.send(mimeMessage);
+
+                mimeMessageHelper.setTo(paymentReq.getSeller());
+                mimeMessageHelper.setSubject("게시하신 PT를 다른 고객님이 예약하셨습니다.");
+                // 본문
                 javaMailSender.send(mimeMessage);
             }
             return "메일 전송 완료되었습니다.";
