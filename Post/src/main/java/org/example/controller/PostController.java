@@ -185,4 +185,9 @@ public class PostController {
     {
         return ResponseEntity.ok(mailService.sendEmail(paymentsReqList,consumer_email));
     }
+    @PostMapping("/emails")
+    public ResponseEntity<String> SendEmailToSell(@RequestBody List<PaymentsReq> paymentsReqList)
+    {
+        return ResponseEntity.ok(mailService.sendEmailToSeller(paymentsReqList));
+    }
 }
