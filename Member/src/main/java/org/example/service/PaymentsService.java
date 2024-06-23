@@ -45,10 +45,9 @@ public class PaymentsService {
 
         if (purchaseDto.getTotal_point()>consumer.get().getPoint()){return PaymentsRes.builder().charge(true).point(Math.abs(consumerPoint)).message("포인트 충전 필요").build();}
         else {
-
             for (PaymentsReq req : purchaseDto.getPayments_list()){
                 req.setConsumer(purchaseDto.getEmail());
-                if(purchaseOne(req, sellers, sellPostId)){return PaymentsRes.builder().charge(false).message("상품이 없습니다").build();}
+                if(purchaseOne(req, sellers, sellPostId)){return PaymentsRes.builder().charge(false).message("수업이 없습니다").build();}
             }
             log.info(sellPostId.toString());
             log.info(String.valueOf(sellers.size()));
@@ -60,10 +59,12 @@ public class PaymentsService {
             if (postFeignRes.isSuccess()){
                 memberRepository.updatePoint(consumerPoint,email);
                 for (String sellerEmail : sellers.keySet()){
+                    log.info(sellerEmail);
+                    log.info(String.valueOf(sellers.get(sellerEmail)));
                     memberRepository.updatePoint(sellers.get(sellerEmail),sellerEmail);
                 }
                 purchaseFeign.saveOrder(purchaseDto.getPayments_list());
-                if (consumer.get().getSocialType() == 1) //카카오 라면
+                if (consumer.get().getSocialType() == 1) //카카오
                 {
                     for (PaymentsReq paymentsReq: purchaseDto.getPayments_list()){
                         log.info("카카오 회원");
@@ -75,14 +76,14 @@ public class PaymentsService {
                     log.info("일반 회원");
                     postFeign.SendEmail(purchaseDto.getPayments_list(),email);//이메일 전송
                 }
-                return PaymentsRes.builder().charge(false).message("구매 성공").build();
+                return PaymentsRes.builder().charge(false).message("예약 성공").build();
             }
             else {
                 log.info(String.valueOf(postFeignRes.getSoldOutIds()));
                 memberRepository.updatePoint(consumer.get().getPoint(),email);
                 return PaymentsRes.builder()
                         .charge(null)
-                        .message("구매하려는 상품중 판매된 상품이 있습니다.")
+                        .message("예약하시려는 수업중 마감된 수업이있습니다")
                         .build();
             }
         }
@@ -98,7 +99,7 @@ public class PaymentsService {
         memberRepository.updatePoint(0,purchaseDto.getEmail());
         for (PaymentsReq req : purchaseDto.getPayments_list()){
             req.setConsumer(purchaseDto.getEmail());
-            if(purchaseOne(req, sellers, sellPostId)){return PaymentsRes.builder().charge(false).message("상품이 없습니다").build();}
+            if(purchaseOne(req, sellers, sellPostId)){return PaymentsRes.builder().charge(false).message("수업이 없습니다").build();}
         }
         PostFeignRes postFeignRes = postFeign.SoldOut(PostFeignReq.builder()
                 .post_id(sellPostId)
@@ -121,14 +122,14 @@ public class PaymentsService {
             {
                 postFeign.SendEmail(purchaseDto.getPayments_list(),purchaseDto.getEmail()); //이메일 전송
             }
-            return PaymentsRes.builder().charge(false).message("구매 성공").build();
+            return PaymentsRes.builder().charge(false).message("예약 성공").build();
         }
         else {
             log.info(String.valueOf(postFeignRes.getSoldOutIds()));
             memberRepository.updatePoint(consumer.get().getPoint(),consumer.get().getEmail());
             return PaymentsRes.builder()
                     .charge(null)
-                    .message("구매하려는 상품중 판매된 상품이 있습니다.")
+                    .message("예약하시려는 수업중 마감된 수업이있습니다")
                     .build();
         }
     }
@@ -147,16 +148,16 @@ public class PaymentsService {
         return false;
     }
 
-    public void sendMessage(Long PostId) throws JsonProcessingException {
+    public void sendMessage(Long postId) throws JsonProcessingException {
         log.info("메시지 로직 동작");
-        log.info(PostId.toString());
-        MessageRes Post= postFeign.getRealImage(PostId);
+        log.info(postId.toString());
+        MessageRes Post= postFeign.getImage(postId);
         log.info(Post.getPost_name());
         Content content = Content.builder()
                 .title("test")
                 .image_url(Post.getImage_real())
                 .link(Link.builder().web_url("http://localhost:3000").build())
-                .description("다락방에서 구매한 상품입니다.")
+                .description("예약되었습니다.")
                 .build();
         TemplateObject templateObject = TemplateObject.builder()
                 .content(content)
