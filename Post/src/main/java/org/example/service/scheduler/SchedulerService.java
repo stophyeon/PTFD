@@ -29,7 +29,7 @@ public class SchedulerService {
 
         postRepository.updatePostsStateForExpiredPosts();
 
-        if(counttuple > 30)
+        if(counttuple > 100)
         {
             List<Post> deletePostList = postRepository.findPostsExpiredOrSelled();
             for (Post deletePost : deletePostList) {
@@ -49,7 +49,7 @@ public class SchedulerService {
 
         postRepository.updatePostsStateForExpiredPosts();
 
-        if(counttuple > 1000)
+        if(counttuple > 100)
         {
             List<Post> deletePostList = postRepository.findPostsExpiredOrSelled();
             for (Post deletePost : deletePostList) {

@@ -18,9 +18,11 @@ public class Member {
     @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
+    @Column(unique = true)
     private String email;
     private String userName;
     private String password;
+    @Column(unique = true)
     private String nickName;
     private String profileImage;
     @ColumnDefault("0")
