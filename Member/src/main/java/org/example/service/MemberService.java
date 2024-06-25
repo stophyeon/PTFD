@@ -53,6 +53,9 @@ public class MemberService {
             if(duplicateEmail(memberDto.getEmail())){
                 return SignUpRes.builder().message("이미 가입된 회원입니다").state("중복 가입").build();
             }
+            if (duplicateNickName(memberDto.getNickName())) {
+            return SignUpRes.builder().message("이미 사용 중인 닉네임입니다").state("중복 닉네임").build();
+            } //이 부분이 , 그떄 작성만되고 적용이 안되어있었습니다. 추가했습니다!
             memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
 
             memberDto.setSocialType(0);

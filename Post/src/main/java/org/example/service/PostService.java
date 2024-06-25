@@ -129,7 +129,7 @@ public class PostService {
 
     @Transactional
     public SuccessRes updatePost(Long postId, PostDto postDto,String email) throws IOException {
-        Post post=postRepository.findByPostId(postId);
+        Post post=postRepository.findByPostIdWithLock(postId); //이떄만 lock 메소드 활용했습니다.
         if (post.getState()==-1 ||post.getState()==0){return new SuccessRes("","해당 상품이 없습니다");}
         else {
             if (post.getEmail().equals(email)){
