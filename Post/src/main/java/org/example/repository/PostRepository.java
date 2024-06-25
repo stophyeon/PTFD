@@ -20,6 +20,10 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("SELECT p FROM Post p WHERE p.postId = :postId")
+    Post findByPostIdWithLock(@Param("postId") Long postId);
+    //lock을 update 시만 사용하게 바꿔보았습니다.
+
     Post findByPostId(Long id);
 
     PostForMessage findImagePostAndPostNameByPostId(Long postId);
@@ -75,7 +79,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     int countTuple() ; //Post 인스턴스 수 세기
 
     @Modifying
-    @Query("UPDATE Post p SET p.state = 0 where p.endAt <= CURRENT_DATE")
+    @Query("UPDATE Post p SET p.state = 0 where p.startAt <= CURRENT_DATE")
     void updatePostsStateForExpiredPosts();
 
     @Query("Select p FROM Post p WHERE p.state in (-1,0)")
