@@ -1,5 +1,4 @@
 package org.example.service;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
@@ -7,14 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.annotation.TimeCheck;
 import org.example.dto.follow.FollowerDto;
 import org.example.dto.follow.FollowingDto;
-import org.example.dto.member.MemberDto;
 import org.example.entity.Follow;
 import org.example.entity.Member;
 import org.example.repository.follow.FollowRepository;
 import org.example.repository.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
 
 @Service
