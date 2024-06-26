@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.dto.post.PostDetailRes;
 import org.example.dto.post.PostDto;
 import org.example.dto.post.PostForMessage;
+import org.example.dto.post.PostWishListCountDto;
 import org.example.dto.purchase.PaymentsReq;
 import org.example.dto.purchase.PurchaseDto;
 import org.example.dto.purchase.SellDto;
@@ -95,8 +96,8 @@ public class PostController {
     })
 
     @GetMapping("/page")
-    public ResponseEntity<Page<PostDto>> getPostPage(@RequestParam(value = "page",required = false, defaultValue = "1") int page,
-                                                           @RequestParam(value = "nick_name",required = false) String nick_name) {
+    public ResponseEntity<Page<PostWishListCountDto>> getPostPage(@RequestParam(value = "page",required = false, defaultValue = "1") int page,
+                                                                  @RequestParam(value = "nick_name",required = false) String nick_name) {
         return ResponseEntity.ok(postService.findPostPage(page-1,nick_name));
     }
 
