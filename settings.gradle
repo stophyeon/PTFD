@@ -5,4 +5,5 @@ include 'Eureka'
 include 'Api-gateway'
 include 'Config-server'
 include 'Purchase'
+include 'Chatting'
 
