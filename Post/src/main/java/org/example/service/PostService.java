@@ -5,6 +5,7 @@ import org.example.dto.SuccessRes;
 import org.example.dto.post.PostDetailRes;
 import org.example.dto.post.PostDto;
 import org.example.dto.post.PostForMessage;
+import org.example.dto.post.PostWishListCountDto;
 import org.example.dto.wish_list.EmailDto;
 import org.example.entity.Post;
 import org.example.entity.WishList;
@@ -56,18 +57,27 @@ public class PostService {
     }
 
     @Transactional
-    public Page<PostDto> findPostPage (int page,String nickName){
+    public Page<PostWishListCountDto> findPostPage (int page,String nickName){
         Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Direction.ASC, "postId"));
         Page<Post> postPage = postRepository.findAll(pageable);
         Page<PostDto> posts=postPage.map(PostDto::ToDto);
-        if (nickName!=null) {
-            Optional<EmailDto> email = memberFeign.getEmail(nickName);
-            email.orElseThrow();
-            List<PostDto> wishs = wishListRepository.findAllByEmail(email.get().getEmail()).get().stream().map(WishList::getPost).toList()
-                    .stream().map(PostDto::ToDto).toList();
-            posts.forEach(p -> p.setLike(wishs.contains(p)));
-        }
-        return posts;
+        Page<PostWishListCountDto> postWishListCountDtos = posts.map(post -> {
+            int wishlistCnt = 0;
+            if (nickName != null) {
+                Optional<EmailDto> email = memberFeign.getEmail(nickName);
+                email.orElseThrow();
+                List<PostDto> wishs = wishListRepository.findAllByEmail(email.get().getEmail()).get().stream().map(WishList::getPost).toList()
+                        .stream().map(PostDto::ToDto).toList();
+                posts.forEach(p -> p.setLike(wishs.contains(p)));
+            }
+            wishlistCnt= wishListRepository.countByPost_PostId(post.getPost_id());
+            log.info("postid"+post.getPost_id());
+            log.info(""+wishlistCnt);
+
+            return PostWishListCountDto.fromPostDto(post, wishlistCnt) ;
+        });
+
+        return postWishListCountDtos;
     }
 
     @Transactional
