@@ -23,8 +23,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         // 서버 -> 클라이언트로 발행하는 메세지에 대한 endpoint 설정 : 구독
-        registry.enableSimpleBroker("/room");
+        registry.enableSimpleBroker("/sub");
         // 클라이언트->서버로 발행하는 메세지에 대한 endpoint 설정 : 구독에 대한 메세지
-        registry.setApplicationDestinationPrefixes("/send");
+        registry.setApplicationDestinationPrefixes("/pub");
     }
 }
