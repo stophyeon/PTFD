@@ -35,16 +35,15 @@ public class PostDto {
     private String nick_name;
     @JsonProperty("user_profile")
     private String userProfile;
-    private String credit;
+    private String location;
     @Builder
-    public PostDto(String credit,Long post_id,String nick_name,String post_name, int price, LocalDate start_at, LocalDate end_at, String image_post, String post_info,int total_number, int category_id, String userProfile,int state,String email,boolean like){
+    public PostDto(Long post_id,String nick_name,String post_name, int price, LocalDate start_at, LocalDate end_at, String image_post, String post_info,int total_number, int category_id, String userProfile,int state,String email,boolean like,String location){
         this.category_id=category_id;
         this.start_at=start_at;
         this.image_post=image_post;
         this.post_name=post_name;
         this.end_at=end_at;
         this.price=price;
-        this.credit=credit;
         this.post_info=post_info;
         this.total_number=total_number;
         this.nick_name=nick_name;
@@ -53,6 +52,7 @@ public class PostDto {
         this.state=state;
         this.like=like;
         this.email=email;
+        this.location=location;
     }
     public static PostDto ToDto(Post post){
         return PostDto.builder()
@@ -69,7 +69,7 @@ public class PostDto {
                 .userProfile(post.getUserProfile())
                 .state(post.getState())
                 .email(post.getEmail())
-                .credit(post.getCredit())
+                .location(post.getLocation())
                 .build();
     }
 

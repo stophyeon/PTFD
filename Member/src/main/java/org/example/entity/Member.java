@@ -33,6 +33,7 @@ public class Member {
     private String role;
     private int socialType;//0일반 1카카오 2네이버
     private String memberInfo;
+    private char gender;
 
     @Builder
     public Member(MemberDto memberDto){
@@ -45,6 +46,7 @@ public class Member {
         this.socialType = memberDto.getSocialType();
         this.memberInfo=memberDto.getMemberInfo();
         this.role=memberDto.getRole();
+        this.gender=memberDto.getGender();
     }
     public static MemberDto toDto(Member member){
         return MemberDto.builder()
@@ -57,6 +59,7 @@ public class Member {
                 .point(member.getPoint())
                 .memberInfo(member.getMemberInfo())
                 .role(member.getRole())
+                .gender(member.getGender())
                 .build();
     }
 

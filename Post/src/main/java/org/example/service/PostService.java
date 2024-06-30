@@ -171,5 +171,30 @@ public class PostService {
         return post;
     }
 
+    //무한스크롤 조회 부
+    @Transactional
+    public Page<PostWishListCountDto> findPostPageInfiniteScroll (int page,String nickName,int pagesize){
+        Pageable pageable = PageRequest.of(page, pagesize, Sort.by(Sort.Direction.ASC, "postId"));
+        Page<Post> postPage = postRepository.findAll(pageable);
+        Page<PostDto> posts=postPage.map(PostDto::ToDto);
+        Page<PostWishListCountDto> postWishListCountDtos = posts.map(post -> {
+            int wishlistCnt = 0;
+            if (nickName != null) {
+                Optional<EmailDto> email = memberFeign.getEmail(nickName);
+                email.orElseThrow();
+                List<PostDto> wishs = wishListRepository.findAllByEmail(email.get().getEmail()).get().stream().map(WishList::getPost).toList()
+                        .stream().map(PostDto::ToDto).toList();
+                posts.forEach(p -> p.setLike(wishs.contains(p)));
+            }
+            wishlistCnt= wishListRepository.countByPost_PostId(post.getPost_id());
+            log.info("postid"+post.getPost_id());
+            log.info(""+wishlistCnt);
+
+            return PostWishListCountDto.fromPostDto(post, wishlistCnt) ;
+        });
+
+        return postWishListCountDtos;
+    }
+
 
 }
