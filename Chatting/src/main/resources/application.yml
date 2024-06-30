@@ -1,11 +1,12 @@
 spring:
   application:
-    name: apigw
+    name: chat
   profiles:
     active: local
   config:
     import: #optional:configserver:http://KPaaS-config-service-1:8071
-      optional:configserver:http://localhost:8071
+     optional:configserver:http://localhost:8071
+
 
 management:
   endpoints:
