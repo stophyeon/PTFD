@@ -24,7 +24,7 @@ import java.util.List;
 public class MailService {
 
     private final PostRepository postRepository;
-    private final JavaMailSender javaMailSender; //dev 환경에선 final 제거.
+    private final JavaMailSender javaMailSender;
 
 
     @Value("${spring.mail.username}")

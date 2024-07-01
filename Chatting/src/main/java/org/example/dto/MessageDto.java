@@ -12,17 +12,17 @@ import java.time.LocalDate;
 
 @Data
 @RequiredArgsConstructor
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+
 public class MessageDto {
     private MessageType type;
     private String sender;
     private LocalDate sendAt;
-    private String content;
+    private String message;
     private Long roomId;
 
     @Builder
-    public MessageDto(String sender, LocalDate sendAt, String content, Long roomId,MessageType type){
-        this.content=content;
+    public MessageDto(String sender, LocalDate sendAt, String message, Long roomId,MessageType type){
+        this.message=message;
         this.sendAt=sendAt;
         this.sender=sender;
         this.roomId=roomId;
@@ -30,7 +30,7 @@ public class MessageDto {
     }
     public static Message toEntity(MessageDto messageDto){
         return Message.builder()
-                .content(messageDto.getContent())
+                .message(messageDto.getMessage())
                 .sendAt(messageDto.getSendAt())
                 .sender(messageDto.getSender())
                 .roomId(messageDto.getRoomId())

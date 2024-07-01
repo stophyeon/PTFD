@@ -1,31 +1,35 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.dto.MessageDto;
+import org.example.dto.MessageType;
 import org.example.service.ChatService;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+
+@Controller
 @RequiredArgsConstructor
+@Slf4j
 public class ChatController {
     private final SimpMessagingTemplate simpMessagingTemplate;
     private final ChatService chatService;
 
     //채팅방애 입장
-    @MessageMapping("/join")
-    public void joinRoom(@RequestBody MessageDto message) {
-        message.setContent(message.getSender()+"님이 입장했습니다.");
-        simpMessagingTemplate.convertAndSend("/sub/chat/"+message.getRoomId(),message.getContent());
-    }
-
     @MessageMapping("/send")
-    public void sendMessage(MessageDto message){
+    public void joinRoom(MessageDto message) {
+        if(MessageType.ENTER.equals(message.getType())){
+            message.setMessage(message.getSender()+"님이 입장했습니다.");
+            log.info(message.getMessage());
+        }
         chatService.saveMsg(message);
-        simpMessagingTemplate.convertAndSend("/sub/chat/"+message.getRoomId(),message.getContent());
+        log.info(message.getSender());
+        log.info(message.getRoomId().toString());
+        log.info(message.getMessage());
+        simpMessagingTemplate.convertAndSend("/sub/chat/" + message.getRoomId(),message);
     }
 
 }

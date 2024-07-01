@@ -27,9 +27,12 @@ public class ChatService {
         return chatRoomRepository.findAll().stream().map(ChattingRoom::toDto).toList();
     }
 
-    public ChatRoomDto makeRoom(ChatRoomDto room){
-        ChattingRoom chatRoom=chatRoomRepository.save(ChattingRoom.createRoom(room.getRoomName()));
+    public ChatRoomDto makeRoom(String roomName){
+        ChattingRoom chatRoom=chatRoomRepository.save(ChattingRoom.createRoom(roomName));
         return ChatRoomDto.builder().roomName(chatRoom.getRoomName()).roomId(chatRoom.getRoomId()).build();
+    }
+    public ChatRoomDto getRoomById(Long roomId){
+        return chatRoomRepository.findById(roomId).map(ChattingRoom::toDto).get();
     }
 
 
