@@ -8,14 +8,13 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ChatRoomDto {
     private Long roomId;
-    private String roomName;
+    private String name;
 
     @Builder
     public ChatRoomDto(Long roomId,String roomName){
         this.roomId=roomId;
-        this.roomName=roomName;
+        this.name=roomName;
     }
 }

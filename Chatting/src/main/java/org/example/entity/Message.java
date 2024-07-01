@@ -19,11 +19,11 @@ public class Message {
     private LocalDate sendAt;
     private String sender;
     private Long roomId;
-    private String content;
+    private String message;
 
     @Builder
-    public Message(Long messageId, LocalDate sendAt,String sender, Long roomId, String content){
-        this.content=content;
+    public Message(Long messageId, LocalDate sendAt,String sender, Long roomId, String message){
+        this.message=message;
         this.sender=sender;
         this.sendAt=sendAt;
         this.roomId=roomId;
