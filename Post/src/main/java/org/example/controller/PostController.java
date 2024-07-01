@@ -1,6 +1,9 @@
 package org.example.controller;
 
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import lombok.extern.slf4j.Slf4j;
@@ -24,12 +27,14 @@ import org.example.service.MailService;
 import org.example.service.SearchService;
 import org.example.service.WishListService;
 import org.example.service.PostService;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @RestController
@@ -203,5 +208,23 @@ public class PostController {
             @RequestParam(value = "page") int page_number,
             @RequestParam(value = "nick_name",required = false) String nick_name) {
         return ResponseEntity.ok(postService.findPostPageInfiniteScroll(page_number,nick_name,8));
+    }
+
+    @GetMapping("/notices")
+    public ResponseEntity<JsonNode> getNotices() throws IOException {
+        //공지사항 전달 부 입니다.
+        //정적인걸 전달하는걸 service로 분리해서 의존성을 하나 올리는 것보다
+        //실제 동작 없이 파싱만 진행하므로 서비스 부 분리 없이 controller부에서 즉시 작성해 보았습니다.
+        ClassPathResource resource = new ClassPathResource("notice.json");
+        InputStream inputStream = resource.getInputStream();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode notices = objectMapper.readTree(inputStream);
+
+        String baseUrl = "/thumbnailfinal.jpg";
+        for (JsonNode notice : notices) {
+            ((ObjectNode) notice).put("thumbnail", baseUrl);
+        }
+        return ResponseEntity.ok(notices);
     }
 }
