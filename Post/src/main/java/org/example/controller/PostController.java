@@ -198,12 +198,12 @@ public class PostController {
     }
 
     //무한스크롤 최초 검색 부
-    @PostMapping("/page_post/default")
+    @GetMapping("/page_post/default")
     public ResponseEntity<Page<PostWishListCountDto>> getDefaultPostPage(@RequestParam(value = "nick_name",required = false) String nick_name) {
         return ResponseEntity.ok(postService.findPostPageInfiniteScroll(0,nick_name,16));
     }
 
-    @PostMapping("/page_post/scroll")
+    @GetMapping("/page_post/scroll")
     public ResponseEntity<Page<PostWishListCountDto>> getScrollPostPage(
             @RequestParam(value = "page") int page_number,
             @RequestParam(value = "nick_name",required = false) String nick_name) {

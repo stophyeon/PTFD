@@ -16,6 +16,7 @@ import org.example.jwt.JwtProvider;
 import org.example.repository.follow.FollowRepository;
 import org.example.repository.member.MemberRepository;
 import org.example.repository.token.TokenRepository;
+import org.example.service.storage.NcpStorageService;
 import org.example.service.storage.StorageService;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,19 +37,23 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final FollowRepository followRepository;
     private final AuthenticationProvider authenticationProvider;
-    private final StorageService storageService;
+//    private final StorageService storageService;
     private final JwtProvider jwtProvider;
     private final TokenRepository tokenRepository;
+    private final NcpStorageService ncpStorageService;
 
-    private final String googleURL = "https://storage.googleapis.com/darakbang-img/";
-
+//    private final String googleURL = "https://storage.googleapis.com/darakbang-img/";
+// ncp로 변경하였으며, 그러므로 더이상 필요 없습니다.
 
 
     @Transactional
     public SignUpRes join(MemberDto memberDto, MultipartFile profileImg) throws IOException {
             if(!profileImg.isEmpty()){
-                String file_name=storageService.imageUpload(profileImg);
-                memberDto.setProfileImage(googleURL+file_name);
+//                String file_name=storageService.imageUpload(profileImg);
+//                memberDto.setProfileImage(googleURL+file_name);
+                // ncp로 변경
+                String file_name=ncpStorageService.imageUpload(profileImg);
+                memberDto.setProfileImage(file_name);
             }
             if(duplicateEmail(memberDto.getEmail())){
                 return SignUpRes.builder().message("이미 가입된 회원입니다").state("중복 가입").build();
@@ -136,9 +141,13 @@ public class MemberService {
     public ExceptionResponse updateProfile(MultipartFile profileImg, MemberDto memberDto, String email) throws IOException {
         Optional<Member> member = memberRepository.findByEmail(email);
         member.orElseThrow();
-        String file_name=storageService.imageUpload(profileImg);
-        memberDto.setProfileImage(googleURL+file_name);
-        storageService.imageDelete(email);
+//        String file_name=storageService.imageUpload(profileImg);
+        String file_name= ncpStorageService.imageUpload(profileImg);
+//        memberDto.setProfileImage(googleURL+file_name);
+        memberDto.setProfileImage(file_name);
+//        storageService.imageDelete(email);
+        //주석 처리 부는, ncp로 기존 gcp를 변경한 것입니다.
+        ncpStorageService.imageDelete(email);
         memberRepository.updateInfo(Member.builder().memberDto(memberDto).build());
         return ExceptionResponse.builder()
                 .state("success")
