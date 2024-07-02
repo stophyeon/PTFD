@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.dto.Chat;
 import org.example.dto.ChatRoomDto;
 import org.example.service.ChatService;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,7 @@ public class ChatRoomController {
     // 특정 채팅방 조회
     @GetMapping("/room/{roomId}")
     @ResponseBody
-    public ChatRoomDto roomInfo(@PathVariable String roomId) {
+    public Chat roomInfo(@PathVariable String roomId) {
         return chatService.getRoomById(Long.parseLong(roomId));
     }
 }

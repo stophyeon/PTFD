@@ -8,7 +8,11 @@ import org.example.service.ChatService;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 
 @Controller
@@ -31,5 +35,7 @@ public class ChatController {
         log.info(message.getMessage());
         simpMessagingTemplate.convertAndSend("/sub/chat/" + message.getRoomId(),message);
     }
+
+
 
 }
