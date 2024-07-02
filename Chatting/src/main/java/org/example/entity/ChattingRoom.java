@@ -1,21 +1,18 @@
 package org.example.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.ChatRoomDto;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document("ChattingRoom")
 @Getter
 @RequiredArgsConstructor
 
 public class ChattingRoom {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roomId;
 
     private String roomName;

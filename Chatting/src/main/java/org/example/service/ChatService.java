@@ -1,6 +1,7 @@
 package org.example.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.dto.Chat;
 import org.example.dto.ChatRoomDto;
 import org.example.dto.MessageDto;
 import org.example.entity.ChattingRoom;
@@ -31,10 +32,20 @@ public class ChatService {
         ChattingRoom chatRoom=chatRoomRepository.save(ChattingRoom.createRoom(roomName));
         return ChatRoomDto.builder().roomName(chatRoom.getRoomName()).roomId(chatRoom.getRoomId()).build();
     }
-    public ChatRoomDto getRoomById(Long roomId){
-        return chatRoomRepository.findById(roomId).map(ChattingRoom::toDto).get();
-    }
 
+    public Chat getRoomById(Long roomId){
+        ChattingRoom room =chatRoomRepository.findByRoomId(roomId);
+        List<Message> messages = messageRepository.findAllByRoomId(roomId);
+
+        return Chat.builder()
+                .name(room.getRoomName())
+                .roomId(room.getRoomId())
+                .messages(messages.stream().map(Message::toDto).toList())
+                .build();
+    }
+    public List<MessageDto> getMessages(String roomId){
+        return messageRepository.findAllByRoomId(Long.parseLong(roomId)).stream().map(Message::toDto).toList();
+    }
 
 
 
