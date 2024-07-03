@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.dto.ChatRoomDto;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("ChattingRoom")
+@Document(collection = "ChattingRoom")
 @Getter
 @RequiredArgsConstructor
 
