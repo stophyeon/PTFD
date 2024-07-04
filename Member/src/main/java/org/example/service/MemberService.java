@@ -163,4 +163,9 @@ public class MemberService {
         Optional<Member> member = memberRepository.findEmailByNickName(nickName);
         return member.map(Member::getEmail).orElse(null);
     }
+
+    public List<String> getnickNameList(char gender)
+    {
+        return memberRepository.findDistinctNickNamesByGender(gender);
+    }
 }

@@ -177,9 +177,18 @@ public class PostController {
         return ResponseEntity.ok(searchService.autoComplete(searchDto.getWord()));
     }
 
+//    @PostMapping("/search")
+//    public ResponseEntity<Page<PostDto>> searchFullWord(@RequestBody SearchDto searchDto, @RequestParam(name = "page",required = false,defaultValue = "1") int page){
+//        return ResponseEntity.ok(searchService.searchPost(searchDto.getPost_name(), page-1));
+//    }
+
     @PostMapping("/search")
-    public ResponseEntity<Page<PostDto>> searchFullWord(@RequestBody SearchDto searchDto, @RequestParam(name = "page",required = false,defaultValue = "1") int page){
-        return ResponseEntity.ok(searchService.searchPost(searchDto.getPost_name(), page-1));
+    public ResponseEntity<Page<PostWishListCountDto>> searchFullWord
+            (@RequestBody SearchDto searchDto,
+             @RequestParam(name = "page",required = false,defaultValue = "1") int page,
+             @RequestParam(name = "category_id", required = false, defaultValue = "0") int category_id,
+             @RequestParam(name = "gender", required = false, defaultValue = "X") char gender){
+        return ResponseEntity.ok(searchService.searchPost(searchDto.getPost_name(), page-1,category_id, gender));
     }
     @PostMapping("/image")
     public PostForMessage getImage(@RequestParam("post_id") Long PostId){
