@@ -31,7 +31,7 @@ public class Member {
     private int following;
     private int point;
     private String role;
-    private int socialType;//0일반 1카카오 2네이버
+    private int socialType;//0일반 1카카오
     private String memberInfo;
     private char gender;
 

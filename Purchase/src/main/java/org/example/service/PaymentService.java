@@ -151,12 +151,12 @@ public class PaymentService {
                     //이 모든 경우를 잡았습니다.
                 })
                 .flatMap(paymentsRes -> {
-                    if ("구매하려는 상품중 판매된 상품이 있습니다.".equals(paymentsRes.getMessage()) || "상품이 없습니다".equals(paymentsRes.getMessage())) {
+                    if ("예약하시려는 수업중 마감된 수업이있습니다".equals(paymentsRes.getMessage()) || "수업이 없습니다".equals(paymentsRes.getMessage())) {
                         OffsetDateTime currentDateTime = OffsetDateTime.now();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
                         return cancelPayment(validationRequest.getPayment_id(), currentDateTime.format(formatter), orderName, validationRequest.getTotal_point(),
-                                "이미 구매 완료된 상품입니다.", "CANCELLED", portOneToken)
+                                "이미 마감된 수업입니다.", "CANCELLED", portOneToken)
                                 .then(Mono.error(new AlreadySoldOutException()));
                     } else {
                         return Mono.just(paymentsRes);

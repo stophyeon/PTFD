@@ -135,7 +135,7 @@ public class MemberController {
     }
 
     @GetMapping("/genderlist")
-    public List<String> getNickNameByGender(@RequestParam("gender") char gender)
+    public List<String> getEmailListByGender(@RequestParam("gender") char gender)
     {
         return memberService.getnickNameList(gender);
     }

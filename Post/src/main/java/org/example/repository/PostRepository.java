@@ -98,28 +98,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "from Post p left join WishList w on p.postId = w.post.postId " +
             "where p.postName LIKE %:postName% and p.state = 1 and p.categoryId = :categoryId " +
             "group by p.postId order by p.startAt desc")
-    Page<PostWishListCountDto> findByPostNameAndStateAndCategoryIdOrderByCreateAtDesc(
-            @Param("postName") String postName,
-            @Param("categoryId") int categoryId,
-            Pageable pageable);
-
-    @Query("select new org.example.dto.post.PostWishListCountDto(" +
-            "p.postId, p.nickName, p.postName, p.price, p.startAt, p.endAt, p.imagePost, p.postInfo, " +
-            "p.totalNumber, p.categoryId, p.userProfile, p.state, p.email, count(w), p.location) " +
-            "from Post p left join WishList w on p.postId = w.post.postId " +
-            "where p.postName like %:postName% and p.state = 1 " +
-            "group by p.postId order by p.startAt desc")
-    Page<PostWishListCountDto> findByPostNameAndStateOrderByCreateAtDesc(
-            @Param("postName") String postName,
-            Pageable pageable);
-
-    @Query("select new org.example.dto.post.PostWishListCountDto(" +
-            "p.postId, p.nickName, p.postName, p.price, p.startAt, p.endAt, p.imagePost, p.postInfo, " +
-            "p.totalNumber, p.categoryId, p.userProfile, p.state, p.email, count(w), p.location) " +
-            "from Post p left join WishList w on p.postId = w.post.postId " +
-            "where p.postName like %:postName% and p.state = 1 and p.categoryId = :categoryId " +
-            "group by p.postId order by p.startAt desc")
-    List<PostWishListCountDto> findByPostNameAndStateAndCategoryIdOrderByCreateAtDescList(
+    List<PostWishListCountDto> findByPostNameAndStateAndCategoryIdOrderByCreateAtDesc(
             @Param("postName") String postName,
             @Param("categoryId") int categoryId);
 
@@ -127,7 +106,43 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "p.postId, p.nickName, p.postName, p.price, p.startAt, p.endAt, p.imagePost, p.postInfo, " +
             "p.totalNumber, p.categoryId, p.userProfile, p.state, p.email, count(w), p.location) " +
             "from Post p left join WishList w on p.postId = w.post.postId " +
-            "where p.postName like %:postName% and p.state = 1 " +
+            "where p.postName like %:postName% and p.state = 1 and p.location= :location " +
             "group by p.postId order by p.startAt desc")
-    List<PostWishListCountDto> findByPostNameAndStateOrderByCreateAtDescList(@Param("postName") String postName);
+    List<PostWishListCountDto> findByPostNameAndStateAndLocationOrderByCreateAtDesc(
+            @Param("postName") String postName,@Param("location") String location);
+
+    @Query("select new org.example.dto.post.PostWishListCountDto(" +
+            "p.postId, p.nickName, p.postName, p.price, p.startAt, p.endAt, p.imagePost, p.postInfo, " +
+            "p.totalNumber, p.categoryId, p.userProfile, p.state, p.email, count(w), p.location) " +
+            "from Post p left join WishList w on p.postId = w.post.postId " +
+            "where p.postName like %:postName% and p.state = 1" +
+            "group by p.postId order by p.startAt desc")
+    List<PostWishListCountDto> findPostPageByPostName(@Param("postName") String postName);
+
+    @Query("select new org.example.dto.post.PostWishListCountDto(" +
+            "p.postId, p.nickName, p.postName, p.price, p.startAt, p.endAt, p.imagePost, p.postInfo, " +
+            "p.totalNumber, p.categoryId, p.userProfile, p.state, p.email, count(w), p.location) " +
+            "from Post p left join WishList w on p.postId = w.post.postId " +
+            "where p.postName like %:postName% and p.state = 1 and p.location= :location and p.categoryId = :categoryId " +
+            "group by p.postId order by p.startAt desc")
+    List<PostWishListCountDto> findByPostNameAndStateAndLocationAndCateogryIdOrderByCreateAtDesc(
+            @Param("postName") String postName,@Param("location") String location,@Param("categoryId") int categoryId);
+
+//    @Query("select new org.example.dto.post.PostWishListCountDto(" +
+//            "p.postId, p.nickName, p.postName, p.price, p.startAt, p.endAt, p.imagePost, p.postInfo, " +
+//            "p.totalNumber, p.categoryId, p.userProfile, p.state, p.email, count(w), p.location) " +
+//            "from Post p left join WishList w on p.postId = w.post.postId " +
+//            "where p.postName like %:postName% and p.state = 1 and p.categoryId = :categoryId " +
+//            "group by p.postId order by p.startAt desc")
+//    List<PostWishListCountDto> findByPostNameAndStateAndCategoryIdOrderByCreateAtDescList(
+//            @Param("postName") String postName,
+//            @Param("categoryId") int categoryId);
+//
+//    @Query("select new org.example.dto.post.PostWishListCountDto(" +
+//            "p.postId, p.nickName, p.postName, p.price, p.startAt, p.endAt, p.imagePost, p.postInfo, " +
+//            "p.totalNumber, p.categoryId, p.userProfile, p.state, p.email, count(w), p.location) " +
+//            "from Post p left join WishList w on p.postId = w.post.postId " +
+//            "where p.postName like %:postName% and p.state = 1 " +
+//            "group by p.postId order by p.startAt desc")
+//    List<PostWishListCountDto> findByPostNameAndStateOrderByCreateAtDescList(@Param("postName") String postName);
 }

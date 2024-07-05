@@ -20,6 +20,6 @@ public interface MemberRepository extends JpaRepository<Member,Long>, MemberRepo
     boolean existsByEmail(String email);
 
 
-    @Query("SELECT DISTINCT m.nickName FROM Member m WHERE m.gender = :gender")
+    @Query("SELECT DISTINCT m.email FROM Member m WHERE m.gender = :gender")
     List<String> findDistinctNickNamesByGender(@Param("gender") char gender);
 }
