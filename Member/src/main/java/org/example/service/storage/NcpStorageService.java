@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -89,20 +91,22 @@ public class NcpStorageService {
 
     public void imageDelete(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
-        member.orElseThrow();
+        member.orElseThrow(() -> new IllegalArgumentException("Member not found for email: " + email));
+
         String profileImageUrl = member.get().getProfileImage();
         if (profileImageUrl == null || profileImageUrl.isEmpty()) {
-            log.info("no Profile Image");
+            log.info("No profile image found,email: {}", email);
             return;
         }
 
-        String keyName = profileImageUrl.substring(profileImageUrl.lastIndexOf("/") + 1);
-
         try {
+            URI uri = new URI(profileImageUrl);
+            String keyName = Paths.get(uri.getPath()).getFileName().toString();
+
             amazonS3Client.deleteObject(new DeleteObjectRequest(bucketName, keyName));
-            log.info("Image delete clear");
+            log.info("Image delete success!!, email: {}", email);
         } catch (Exception e) {
-            log.error("can't delete image");
+            log.error("Fail", e);
         }
     }
 

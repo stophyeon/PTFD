@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -96,10 +98,11 @@ public class NcpStorageService {
             return;
         }
 
-        String keyName = postImageUrl.substring(postImageUrl.lastIndexOf("/") + 1);
-
         try {
-            log.info(keyName);
+
+            URI uri = new URI(postImageUrl);
+            String keyName = Paths.get(uri.getPath()).getFileName().toString();
+
             amazonS3Client.deleteObject(new DeleteObjectRequest(bucketName, keyName));
             log.info("Image delete clear");
         } catch (Exception e) {

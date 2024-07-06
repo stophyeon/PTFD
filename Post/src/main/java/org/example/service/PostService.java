@@ -84,10 +84,10 @@ public class PostService {
     }
 
     @Transactional
-    public Page<PostDto> findMyPostPage (String nickName,int page){
-        Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Direction.ASC, "postId"));
-        Page<Post> PostPage = postRepository.findAllByNickName(pageable,nickName);
-        return PostPage.map(PostDto::ToDto);
+    public Page<PostWishListCountDto> findMyPostPage (String nickName,int page){
+        Pageable pageable = PageRequest.of(page,8, Sort.by(Sort.Direction.ASC, "postId"));
+        Page<PostWishListCountDto> PostPage = postRepository.findAllByNickName(pageable,nickName);
+        return PostPage;
     }
 
     @Transactional
