@@ -116,7 +116,7 @@ public class PostController {
             @Parameter(name = "page",description = "요청 페이지")
     })
     @GetMapping("/mypage")
-    public ResponseEntity<Page<PostDto>> getMyPostPage(@RequestParam(value = "page",required = false, defaultValue = "1") int page,@RequestParam("nick_name") String nickName) {
+    public ResponseEntity<Page<PostWishListCountDto>> getMyPostPage(@RequestParam(value = "page",required = false, defaultValue = "1") int page,@RequestParam("nick_name") String nickName) {
         return ResponseEntity.ok(postService.findMyPostPage(nickName,page-1));
     }
     //게시글 1개 검색
@@ -177,9 +177,19 @@ public class PostController {
         return ResponseEntity.ok(searchService.autoComplete(searchDto.getWord()));
     }
 
-    @PostMapping("/search")
-    public ResponseEntity<Page<PostDto>> searchFullWord(@RequestBody SearchDto searchDto, @RequestParam(name = "page",required = false,defaultValue = "1") int page){
-        return ResponseEntity.ok(searchService.searchPost(searchDto.getPost_name(), page-1));
+//    @PostMapping("/search")
+//    public ResponseEntity<Page<PostDto>> searchFullWord(@RequestBody SearchDto searchDto, @RequestParam(name = "page",required = false,defaultValue = "1") int page){
+//        return ResponseEntity.ok(searchService.searchPost(searchDto.getPost_name(), page-1));
+//    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<PostWishListCountDto>> searchFullWord
+            (@RequestBody SearchDto searchDto,
+             @RequestParam(name = "page",required = false,defaultValue = "1") int page,
+             @RequestParam(name = "category_id", required = false, defaultValue = "0") int category_id,
+             @RequestParam(name = "gender", required = false, defaultValue = "X") char gender,
+            @RequestParam(name = "location", required = false, defaultValue = "X") String location){
+        return ResponseEntity.ok(searchService.searchPost(searchDto.getPost_name(), page-1,category_id, gender, location));
     }
     @PostMapping("/image")
     public PostForMessage getImage(@RequestParam("post_id") Long PostId){
@@ -198,12 +208,12 @@ public class PostController {
     }
 
     //무한스크롤 최초 검색 부
-    @PostMapping("/page_post/default")
+    @GetMapping("/page_post/default")
     public ResponseEntity<Page<PostWishListCountDto>> getDefaultPostPage(@RequestParam(value = "nick_name",required = false) String nick_name) {
         return ResponseEntity.ok(postService.findPostPageInfiniteScroll(0,nick_name,16));
     }
 
-    @PostMapping("/page_post/scroll")
+    @GetMapping("/page_post/scroll")
     public ResponseEntity<Page<PostWishListCountDto>> getScrollPostPage(
             @RequestParam(value = "page") int page_number,
             @RequestParam(value = "nick_name",required = false) String nick_name) {

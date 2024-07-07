@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.repository.WishListRepository;
 import org.example.service.member.MemberFeign;
+import org.example.service.storage.NcpStorageService;
 import org.example.service.storage.StorageService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,6 +37,7 @@ public class PostService {
     private final MemberFeign memberFeign;
     private final StorageService storageService;
     private final String googleURL = "https://storage.googleapis.com/darakbang-img/";
+    private final NcpStorageService ncpStorageService;
 
     public SuccessRes addPost(PostDto postDto, String email, MultipartFile img_Post) throws IOException {
         Optional<String> nickName= memberFeign.getNickName(email);
@@ -45,12 +47,13 @@ public class PostService {
         postDto.setNick_name(nickName.get());
         postDto.setUserProfile(profile.get());
         // 이미지 구글 클라우드 저장
-        InputStream keyFile = ResourceUtils.getURL("classpath:darakbang-422004-c04b80b50e78.json" ).openStream();
+//        InputStream keyFile = ResourceUtils.getURL("classpath:darakbang-422004-c04b80b50e78.json" ).openStream();
 
-        String Post_file_name= storageService.imageUpload(img_Post);
+//        String Post_file_name= storageService.imageUpload(img_Post);
 
-        postDto.setImage_post(googleURL+Post_file_name);
-
+        String Post_file_name = ncpStorageService.imageUpload(img_Post);
+//        postDto.setImage_post(googleURL+Post_file_name);
+        postDto.setImage_post(Post_file_name);
         Post post = Post.ToEntity(postDto,email);
         postRepository.save(post);
         return new SuccessRes(post.getPostName(),"success");
@@ -81,17 +84,18 @@ public class PostService {
     }
 
     @Transactional
-    public Page<PostDto> findMyPostPage (String nickName,int page){
-        Pageable pageable = PageRequest.of(page, 9, Sort.by(Sort.Direction.ASC, "postId"));
-        Page<Post> PostPage = postRepository.findAllByNickName(pageable,nickName);
-        return PostPage.map(PostDto::ToDto);
+    public Page<PostWishListCountDto> findMyPostPage (String nickName,int page){
+        Pageable pageable = PageRequest.of(page,8, Sort.by(Sort.Direction.ASC, "postId"));
+        Page<PostWishListCountDto> PostPage = postRepository.findAllByNickName(pageable,nickName);
+        return PostPage;
     }
 
     @Transactional
     public SuccessRes deletePost(Long PostId, String email) throws IOException {
             Post Post = postRepository.findByPostId(PostId);
             if (Post.getEmail().equals(email)) {
-                storageService.PostImageDelete(PostId);
+//                storageService.PostImageDelete(PostId);
+                ncpStorageService.imageDelete(PostId);
                 postRepository.delete(Post);
                 return new SuccessRes(Post.getPostName(), "삭제 성공");
             }

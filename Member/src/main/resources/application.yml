@@ -6,6 +6,11 @@ spring:
   config:
     import: optional:configserver:http://KPaaS-config-service-1:8071
       #optional:configserver:http://localhost:8071
+  s3:
+    accessKey: 38F622CB2CE7257CD472
+    secretKey: 8AD3992D3D09C965081B0B4687B4D6B017E4D915
+    bucket: contest16-objectstorage-imagebucket
+
 
 
 management:

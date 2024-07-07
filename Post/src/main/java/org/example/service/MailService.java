@@ -39,7 +39,7 @@ public class MailService {
                 // 수신자
                 mimeMessageHelper.setTo(paymentReq.getSeller());
                 // 제목
-                mimeMessageHelper.setSubject("신청하신 PT가 예약되었습니다.");
+                mimeMessageHelper.setSubject("게시하신 PT를 다른 고객님이 예약하셨습니다.");
 
                 // 이미지 ->datasource로 변경.
                 URL imageUrl = new URL(postRepository.findImagePostByPostId(paymentReq.getPost_id()));

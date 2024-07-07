@@ -134,6 +134,12 @@ public class MemberController {
         return EmailDto.builder().email(memberService.getEmail(nickName)).build();
     }
 
+    @GetMapping("/genderlist")
+    public List<String> getEmailListByGender(@RequestParam("gender") char gender)
+    {
+        return memberService.getnickNameList(gender);
+    }
+
 
 
 }
