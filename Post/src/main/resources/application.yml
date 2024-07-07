@@ -25,7 +25,7 @@ spring:
   s3:
     accessKey: 38F622CB2CE7257CD472
     secretKey: 8AD3992D3D09C965081B0B4687B4D6B017E4D915
-    bucket: team16
+    bucket: contest16-objectstorage-imagebucket
 management:
   endpoints:
     web:
