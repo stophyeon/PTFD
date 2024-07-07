@@ -1,27 +1,26 @@
 package org.example.dto;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.example.entity.Message;
+import org.example.entity.ChatMessage;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
 @RequiredArgsConstructor
-public class MessageDto {
+public class Message implements Serializable {
     private MessageType type;
     private String sender;
     private LocalDate sendAt;
     private String message;
     private Long roomId;
-    private boolean read;
+    private int read;
 
     @Builder
-    public MessageDto(String sender, LocalDate sendAt, String message, Long roomId,MessageType type,boolean read){
+    public Message(String sender, LocalDate sendAt, String message, Long roomId, MessageType type, int read){
         this.message=message;
         this.sendAt=sendAt;
         this.sender=sender;
@@ -29,13 +28,13 @@ public class MessageDto {
         this.type=type;
         this.read=read;
     }
-    public static Message toEntity(MessageDto messageDto){
-        return Message.builder()
+    public static ChatMessage toEntity(Message messageDto){
+        return ChatMessage.builder()
                 .message(messageDto.getMessage())
                 .sendAt(messageDto.getSendAt())
                 .sender(messageDto.getSender())
                 .roomId(messageDto.getRoomId())
-                .read(messageDto.isRead())
+                .read(messageDto.getRead())
                 .build();
     }
 

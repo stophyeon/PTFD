@@ -11,10 +11,10 @@ import java.util.List;
 public class Chat {
     private Long roomId;
     private String name;
-    private List<MessageDto> messages;
+    private List<Message> messages;
 
     @Builder
-    public Chat(Long roomId, String name, List<MessageDto> messages){
+    public Chat(Long roomId, String name, List<Message> messages){
         this.messages=messages;
         this.name=name;
         this.roomId=roomId;
