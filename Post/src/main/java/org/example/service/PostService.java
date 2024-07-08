@@ -13,7 +13,6 @@ import org.example.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.repository.WishListRepository;
-import org.example.service.member.MemberFeign;
 import org.example.service.storage.NcpStorageService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

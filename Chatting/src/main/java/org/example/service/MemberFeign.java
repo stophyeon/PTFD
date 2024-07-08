@@ -1,4 +1,4 @@
-package org.example.service.member;
+package org.example.service;
 
 import org.springframework.cloud.openfeign.FeignClient;
 
