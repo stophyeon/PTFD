@@ -15,10 +15,11 @@ public class MessageListener {
 
     @KafkaListener(
             topics = "chat",
-            groupId = "foo"
+            groupId = "chatting"
     )
     public void listen(Message message) {
-        log.info("sending via kafka listener..");
+        System.out.println("sending via kafka listener..");
+        log.info(message.getMessage());
         template.convertAndSend("/topic/group", message);
     }
 }

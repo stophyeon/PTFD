@@ -4,7 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
-import org.apache.kafka.common.protocol.Message;
+import org.example.dto.Message;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -20,13 +21,14 @@ import java.time.LocalDateTime;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping(value = "/kafka")
+@RequestMapping(value = "/chat")
 public class ChatController {
     private final KafkaTemplate<String, Message> kafkaTemplate;
+
     @PostMapping(value = "/publish")
     public void sendMessage(@RequestBody Message message) {
-        log.info("Produce message : " + message.toString());
-
+        log.info("Produce message : {}", message.toString());
+        message.setSendAt(LocalDateTime.now());
         try {
             kafkaTemplate.send("chat", message).get();
         } catch (Exception e) {
@@ -34,11 +36,15 @@ public class ChatController {
         }
     }
 
-    @MessageMapping("/sendMessage")
+    @MessageMapping("/chat/send")
     @SendTo("/topic/group")
     public Message broadcastGroupMessage(@Payload Message message) {
+        //Sending this message to all the subscribers
         return message;
     }
+
+
+
 
 
 

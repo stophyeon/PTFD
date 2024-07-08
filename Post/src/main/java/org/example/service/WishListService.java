@@ -10,10 +10,8 @@ import org.example.entity.WishList;
 import org.example.entity.Post;
 import org.example.repository.WishListRepository;
 import org.example.repository.PostRepository;
-import org.example.service.member.MemberFeign;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
