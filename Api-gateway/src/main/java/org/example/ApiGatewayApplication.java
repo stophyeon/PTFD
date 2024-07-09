@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 
 public class ApiGatewayApplication {
     public static void main(String[] args) {

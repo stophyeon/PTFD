@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @RefreshScope
 public class MemberApplication {
     public static void main(String[] args) {
