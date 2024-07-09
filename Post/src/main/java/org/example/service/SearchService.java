@@ -39,7 +39,7 @@ public class SearchService {
 
     @TimeCheck
     public Page<PostWishListCountDto> searchPost(String postName, int page, int category_id, char gender, String location) {
-        int pageSize = (page == 0 ? 12 : 8);
+        int pageSize = (page == 0 ? 16 : 8);
         Pageable pageable = PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "postName"));
 
         List<PostWishListCountDto> resultList = findMorePosts(postName, category_id, location, pageable);
@@ -63,7 +63,7 @@ public class SearchService {
             end = Math.min(11,resultList.size());
         }
         else {
-            start = 12 + ( (page -1)*pageSize);
+            start = 16 + ( (page -1)*pageSize);
             end = Math.min(start+pageSize-1, resultList.size());
         } // 만든, page 번호 잘라내기 입니다.
 
