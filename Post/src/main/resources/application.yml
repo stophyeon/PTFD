@@ -1,33 +1,39 @@
-
 spring:
-  main:
-    allow-bean-definition-overriding: true
-  application:
-    name: post
-  profiles:
-    active: dev
-  config:
-    import: optional:configserver:http://KPaaS-config-service-1:8071
+  cloud:
+    kubernetes:
+      config:
+        enabled: true
+        sources:
+          - name: post-config
+#spring:
+#  main:
+#    allow-bean-definition-overriding: true
+#  application:
+#    name: post
+#  profiles:
+#    active: dev
+#  config:
+#    import: optional:configserver:http://KPaaS-config-service-1:8071
       #optional:configserver:http://localhost:8071
-  mail:
-    host: smtp.naver.com
-    port: 465
-    username: darakbang0414
-    password: asas1212
-    properties:
-      mail.smtp.auth: true
-      mail.smtp.starttls.enable: true
-      mail.smtps.checkserveridentity: true
-      mail.smtps.ssl.trust: "*"
-      mail.debug: true
-      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+#  mail:
+#    host: smtp.naver.com
+#    port: 465
+#    username: darakbang0414
+#    password: asas1212
+#    properties:
+#      mail.smtp.auth: true
+#      mail.smtp.starttls.enable: true
+#      mail.smtps.checkserveridentity: true
+#      mail.smtps.ssl.trust: "*"
+#      mail.debug: true
+#      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
 
-  s3:
-    accessKey: 38F622CB2CE7257CD472
-    secretKey: 8AD3992D3D09C965081B0B4687B4D6B017E4D915
-    bucket: contest16-objectstorage-imagebucket
-management:
-  endpoints:
-    web:
-      exposure:
-        include: ['refresh','beans','env']
+#  s3:
+#    accessKey: 38F622CB2CE7257CD472
+#    secretKey: 8AD3992D3D09C965081B0B4687B4D6B017E4D915
+#    bucket: contest16-objectstorage-imagebucket
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: ['refresh','beans','env']
