@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 @EnableFeignClients
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @EnableScheduling
 @RefreshScope
 public class PostApplication {
