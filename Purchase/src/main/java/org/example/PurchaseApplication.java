@@ -10,7 +10,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 @EnableFeignClients
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 @RefreshScope
 @EnableAspectJAutoProxy
 public class PurchaseApplication {
