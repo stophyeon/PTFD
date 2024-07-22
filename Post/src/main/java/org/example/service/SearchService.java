@@ -7,6 +7,7 @@ import org.example.annotation.TimeCheck;
 import org.example.dto.post.PostWishListCountDto;
 import org.example.entity.Post;
 import org.example.repository.PostRepository;
+import org.example.service.member.MemberFeign;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 

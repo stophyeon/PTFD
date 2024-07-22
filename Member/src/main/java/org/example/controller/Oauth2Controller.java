@@ -23,7 +23,7 @@ public class Oauth2Controller {
         return kakaoService.GenerateToken(code);
     }
 
-    @GetMapping("oauth2/naver")
+    @GetMapping("/oauth2/naver")
     public JwtDto naverToken(@RequestParam("code") String code) throws IOException, ParseException, org.json.simple.parser.ParseException {
         return naverService.GenerateToken(code);
     }

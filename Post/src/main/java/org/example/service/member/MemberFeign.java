@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.service.member;
 
 import org.example.dto.wish_list.EmailDto;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Component
 //@FeignClient(name = "member",url = "http://localhost:8080/member")
-@FeignClient(name = "member",url = "http://KPaaS-member-service-1:8080/member")
+@FeignClient(name = "member",url = "http://member-service:81/member")
 public interface MemberFeign {
     @GetMapping("/nick_name")
     public Optional<String> getNickName(@RequestParam("email") String email);
