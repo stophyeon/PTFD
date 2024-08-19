@@ -3,12 +3,12 @@
 
 > 장애인 PT 예약,문의 서비스
 
-> 배포 URL [[https://www.example.com](http://default-front-84485-25569413-20a094b6a545.kr.lb.naverncp.com:30)]
+> 배포 URL [[PTFD](http://default-front-84485-25569413-20a094b6a545.kr.lb.naverncp.com:30)]
 
 ## 프로젝트
 - BackEnd 2/ FrontEnd 2
 - 개발 기간 2024.06.30 - 2024.09.04
-- 
+
 
 ## 팀원소개
 | **정지현** | **임지혁** | **신민재** | **김민우** |
