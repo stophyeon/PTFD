@@ -2,7 +2,8 @@
 ![로고](https://github.com/user-attachments/assets/488e628b-1f33-41dd-86f9-dae5c359f75f)
 
 > 장애인 PT 예약,문의 서비스
-> 배포 URL [_here_]([https://www.example.com](http://default-front-84485-25569413-20a094b6a545.kr.lb.naverncp.com:30))
+
+> 배포 URL [[https://www.example.com](http://default-front-84485-25569413-20a094b6a545.kr.lb.naverncp.com:30)]
 
 ## 프로젝트
 - BackEnd 2/ FrontEnd 2
