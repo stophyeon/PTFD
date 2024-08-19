@@ -3,18 +3,23 @@
 > Live demo [_here_]([https://www.example.com](http://default-front-84485-25569413-20a094b6a545.kr.lb.naverncp.com:30))
 
 ## 목차
+* [프로젝트 소개](#프로젝트)
 * [팀원 소개](#팀원소개)
 * [사용 기술](#사용기술)
 * [아키텍쳐](#아키텍쳐)
 * [주요 기능](#주요기능)
 * [Demo](#Demo)
 
+## 프로젝트
+
+
 
 ## 팀원소개
 | **정지현** | **임지혁** | **신민재** | **김민우** |
 | ---------- | ---------- | ---------- |------------|
-| ![정지현](https://github.com/user-attachments/assets/fafc64d6-822a-40fc-b95a-4ba787bda859) | ![임지혀](https://github.com/user-attachments/assets/7ad081ee-1908-4dd7-9dbc-9d99a9287edb) | ![신민재](https://github.com/user-attachments/assets/b5c36a1c-c2d0-4a34-a40e-ad1b49f402d5) | ![kmw](https://github.com/user-attachments/assets/6dcfb6fd-eae1-44aa-bd39-d083f929ad3a) |
-| 백엔드 | 백엔드 | 프론트엔드 | 프론트엔드 |
+| ![정지현](https://github.com/user-attachments/assets/fafc64d6-822a-40fc-b95a-4ba787bda859) | ![임지혀](https://github.com/user-attachments/assets/7ad081ee-1908-4dd7-9dbc-9d99a9287edb) | ![신민재](https://github.com/user-attachments/assets/b5c36a1c-c2d0-4a34-a40e-ad1b49f402d5) | ![kmw2](https://github.com/user-attachments/assets/da799522-3d1f-4535-8a9c-c398c0b43f38) |
+| **백엔드** | **백엔드** | **프론트엔드** | **프론트엔드** |
+
 
 
 
