@@ -30,7 +30,7 @@
 - 협업 - <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> 
 
 ## 아키텍쳐
-
+![아키텍처](https://github.com/user-attachments/assets/99f25eea-bec4-4140-8b95-ec1b4f83e6ef)
 
 ## 주요기능
 List the ready features here:
