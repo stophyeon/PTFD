@@ -32,6 +32,9 @@
 ## 아키텍쳐
 ![아키텍처](https://github.com/user-attachments/assets/99f25eea-bec4-4140-8b95-ec1b4f83e6ef)
 
+## 서비스 흐름도
+![1](https://github.com/user-attachments/assets/25545ad8-bbb2-47cf-82a7-74a8c66a1625)
+
 ## 주요기능
 List the ready features here:
 - Awesome feature 1
